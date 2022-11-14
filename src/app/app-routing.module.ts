@@ -1,8 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { SquidGameComponent } from './squid-game/squid-game.component';
 
 const routes: Routes = [
-
+  {
+    path: 'squid-game',
+    component: SquidGameComponent,
+  },
 ];
 
 @NgModule({

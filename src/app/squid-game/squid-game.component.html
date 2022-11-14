@@ -1,1 +1,15 @@
-<p>squid-game works!</p>
+<div class="group-box-person">
+  <div
+    *ngFor="let player of players | async"
+    [className]="'box-person ' + player.status"
+     [ngClass]="{'selected': player.selected}"
+     (click)="onPlayerSelect(player)"
+  >
+    <div class="avatar">
+      <img src="assets/img/avatar-default.png" width="100%" alt="" />
+    </div>
+    <div class="name">{{ player.name }}</div>
+  </div>
+</div>
+
+<button class="btn btn-danger" (click)="kill()">Kill</button>
