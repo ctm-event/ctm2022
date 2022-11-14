@@ -3,7 +3,7 @@
     *ngFor="let player of players | async"
     [className]="'box-person ' + player.status"
      [ngClass]="{'selected': player.selected}"
-     (click)="onPlayerSelect(player)"
+     (click)="onPlayerSelect(player, $event)"
   >
     <div class="avatar">
       <img src="assets/img/avatar-default.png" width="100%" alt="" />
@@ -12,4 +12,4 @@
   </div>
 </div>
 
-<button class="btn btn-danger" (click)="kill()">Kill</button>
+<button type="button" class="button-3d" (click)="boom()">Boom!</button>

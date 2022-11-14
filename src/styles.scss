@@ -1,1 +1,25 @@
 /* You can add global styles to this file, and also import other style files */
+@import "assets/style/button-3d.scss";
+
+@keyframes boom {
+  0% {
+
+  }
+  15% {
+
+  }
+  75% {
+
+  }
+  100% {
+
+  }
+}
+
+.boom {
+  background: url('assets/img/explosion.png');
+  animation-name: boom;
+  animation-duration: 1s;
+}
+
+

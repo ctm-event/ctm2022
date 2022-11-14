@@ -21,7 +21,9 @@
   border: 6px solid green;
   position: relative;
 }
-
+.box-person.alive {
+  cursor: url(/assets/img/dynamite_cursor.png), auto;
+}
 .box-person.standby {
   opacity: 0.5;
 }
