@@ -55,7 +55,7 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.service.boom$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       const nativeElement = this.imgTag.nativeElement;
-      nativeElement.src = environment.baseHref + "assets/img/explosion.png";
+      nativeElement.src = environment.baseHref + "/assets/img/explosion.png";
       this.top = '0px';
       this.left = '0px';
       nativeElement.style.transform = 'scale(1.7)';
