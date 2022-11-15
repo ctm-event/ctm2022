@@ -58,10 +58,15 @@ app-dynamite {
 .box-person.alive.selected .avatar {
   cursor: grab;
 }
-
+.box-person .name{
+  font-weight: 600;
+  font-size: 18px;
+}
 .star {
   position: absolute;
-  left: 50px;
+  bottom: 2px;
+  left: 50%;
+  transform: translateX(-50%);
   width: 40px;
   z-index: 999;
   height: 40px;
