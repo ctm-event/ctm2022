@@ -10,6 +10,7 @@ import {
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs';
 import { BaseComponent } from 'src/app/base.component';
+import { environment } from 'src/environments/environment';
 import { SquidGameService } from '../../squid-game.service';
 
 @Component({
@@ -41,7 +42,7 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
 
   @ViewChild('img', { read: ElementRef<HTMLImageElement> })
   imgTag!: ElementRef<HTMLImageElement>;
-  public imgSrc: string = 'assets/img/dynamite_cursor.png';
+  public imgSrc: string = environment.baseHref + '/assets/img/dynamite_cursor.png';
 
   constructor(
     private service: SquidGameService,
@@ -53,7 +54,7 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.service.boom$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       const nativeElement = this.imgTag.nativeElement;
-      nativeElement.src = "/assets/img/explosion.png";
+      nativeElement.src = environment.baseHref + "/assets/img/explosion.png";
       this.top = '0px';
       this.left = '0px';
       nativeElement.style.transform = 'scale(1.7)';
