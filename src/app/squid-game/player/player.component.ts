@@ -65,6 +65,7 @@ export class PlayerComponent extends BaseComponent implements OnInit {
     if (!this.squidGameService.isPLayerAlive(this.player)) return;
 
     if (!!this.player.selected) {
+      this.deSelect();
       return;
     }
 
@@ -75,8 +76,8 @@ export class PlayerComponent extends BaseComponent implements OnInit {
     const elmRect = this.elmRef.nativeElement.getBoundingClientRect();
     this.player.selected = true;
     this.dynamiteCmpRef = this.placeHolder.createComponent(DynamiteComponent);
-    this.dynamiteCmpRef.instance.x = $event.clientX - elmRect.x + 'px';
-    this.dynamiteCmpRef.instance.y = $event.clientY - elmRect.y + 'px';
+    // this.dynamiteCmpRef.instance.x = $event.clientX - elmRect.x + '0px';
+    // this.dynamiteCmpRef.instance.y = $event.clientY - elmRect.y + '0px';
     this.dynamiteCmpRef.instance.deSelect = () => this.deSelect();
     this.onSelect.emit(this.player);
   }

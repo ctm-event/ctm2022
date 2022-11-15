@@ -34,9 +34,11 @@ app-dynamite {
 }
 .box-person.standby .avatar {
   border: 6px solid darkorange;
+  cursor: not-allowed;
 }
 .box-person.dead .avatar {
   border: 6px solid red;
+  cursor: not-allowed;
 }
 .box-person.dead .avatar::before,
 .box-person.dead .avatar::after {
@@ -50,7 +52,11 @@ app-dynamite {
 }
 
 .box-person.alive:not(.selected) .avatar {
-  cursor: url("/assets/img/dynamite_cursor.png"), auto;
+  cursor: crosshair;
+}
+
+.box-person.alive.selected .avatar {
+  cursor: grab;
 }
 
 .star {

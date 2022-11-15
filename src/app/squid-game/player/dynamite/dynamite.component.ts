@@ -11,6 +11,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs';
 import { BaseComponent } from 'src/app/base.component';
 import { environment } from 'src/environments/environment';
+import { SquidGameHelper } from '../../squid-game.helper';
 import { SquidGameService } from '../../squid-game.service';
 
 @Component({
@@ -21,16 +22,14 @@ import { SquidGameService } from '../../squid-game.service';
 export class DynamiteComponent extends BaseComponent implements OnInit {
   @HostBinding('style') style: SafeStyle = {
     position: 'absolute',
-    cursor: 'grab',
-    top: '0',
-    left: '0',
+    cursor: 'grab'
   };
 
   @HostBinding('style.top')
-  top: SafeStyle = this.sanitizer.bypassSecurityTrustStyle('auto');
+  top: SafeStyle = this.sanitizer.bypassSecurityTrustStyle('0');
 
   @HostBinding('style.left')
-  left: SafeStyle = this.sanitizer.bypassSecurityTrustStyle('auto');
+  left: SafeStyle = this.sanitizer.bypassSecurityTrustStyle('0');
 
   @Input() set x(value: string) {
     this.left = value;
@@ -42,19 +41,21 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
 
   @ViewChild('img', { read: ElementRef<HTMLImageElement> })
   imgTag!: ElementRef<HTMLImageElement>;
-  public imgSrc: string = environment.baseHref + '/assets/img/dynamite_cursor.png';
+  public imgSrc!: string;
 
   constructor(
     private service: SquidGameService,
-    private sanitizer: DomSanitizer
+    private sanitizer: DomSanitizer,
+    private helper: SquidGameHelper
   ) {
     super();
+    this.imgSrc = helper.getSelectedIcon();
   }
 
   ngOnInit(): void {
     this.service.boom$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       const nativeElement = this.imgTag.nativeElement;
-      nativeElement.src = environment.baseHref + "/assets/img/explosion.png";
+      nativeElement.src = environment.baseHref + "assets/img/explosion.png";
       this.top = '0px';
       this.left = '0px';
       nativeElement.style.transform = 'scale(1.7)';
@@ -62,8 +63,10 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
         'animate__animated animate__zoomIn animate__fastest';
       setTimeout(() => {
         nativeElement.classList.add('animate__zoomOut');
+      }, 300);
+      setTimeout(() => {
         this.deSelect();
-      }, 450);
+      }, 500);
     });
   }
 

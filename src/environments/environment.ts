@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  baseHref: '/ctm2022'
+  baseHref: ''
 };
 
 /*
