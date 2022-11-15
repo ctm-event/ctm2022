@@ -1,18 +1,21 @@
 <div class="group-box-person">
-  <div
-    *ngFor="let player of players | async"
-    [className]="'box-person ' + player.status"
-     [ngClass]="{'selected': player.selected}"
-     (click)="onPlayerSelect(player, $event)"
-  >
-    <div class="avatar">
-      <img src="assets/img/avatar-default.png" width="100%" alt="" />
-    </div>
-    <div class="name">{{ player.name }}</div>
-  </div>
+  <ng-container *ngFor="let player of players | async">
+    <app-player
+      (onSelect)="onSelectHandler($event)"
+      (onDeselect)="onDeselectHandler($event)"
+      [player]="player"
+    ></app-player>
+  </ng-container>
 </div>
 
-
-<nav class="navbar fixed-bottom navbar-light bg-light animate__animated animate__bounce">
-  <button type="button" class="button-3d" (click)="boom()">Boom!</button>
+<nav class="navbar fixed-bottom navbar-light bg-light">
+  <button
+    type="button"
+    class="button-3d animate__animated animate__slideInUp animate__fastest"
+    [ngClass]="{ animate__slideOutDown: !isDisplayActionBar }"
+    (click)="boom()"
+  >
+    Boom!
+  </button>
+  <button type="button" class="button-3d animate__animated animate__slideInUp animate__fastest" (click)="revive()">Revive</button>
 </nav>

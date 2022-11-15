@@ -1,4 +1,3 @@
-import { PlayerStatus } from './player-status.constant';
 
 export type Player = {
   id: number;
