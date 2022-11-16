@@ -60,13 +60,13 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
       this.left = '0px';
       nativeElement.style.transform = 'scale(1.7)';
       nativeElement.className =
-        'animate__animated animate__zoomIn animate__fastest';
+        'animate__animated animate__zoomIn animate__fast';
       setTimeout(() => {
         nativeElement.classList.add('animate__zoomOut');
-      }, 300);
+      }, 600);
       setTimeout(() => {
         this.deSelect();
-      }, 500);
+      }, 1000);
     });
   }
 

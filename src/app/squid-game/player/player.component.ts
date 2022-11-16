@@ -26,7 +26,6 @@ export class PlayerComponent extends BaseComponent implements OnInit {
   @Input()
   set player(value: Player) {
     this._player = value;
-    this.deSelect();
   }
 
   get player(): Player {

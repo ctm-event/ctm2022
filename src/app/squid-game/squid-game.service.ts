@@ -88,7 +88,7 @@ export class SquidGameService {
     this.boom$.next(true);
     setTimeout(() => {
       this.players$.next(this._players);
-    }, 400);
+    }, 1000);
   }
 
   revive(): void {
