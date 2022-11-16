@@ -1,0 +1,15 @@
+.group-box-person {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  transition: 1s all linear;
+
+}
+
+app-player {
+  position: relative;
+}
+
+.box-person {
+  transition: 1s all linear;
+}

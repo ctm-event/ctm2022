@@ -38,19 +38,32 @@ app-dynamite {
   cursor: not-allowed;
 }
 .box-person.dead .avatar {
-  border: 6px solid red;
-  cursor: not-allowed;
+  border: none;
+  border-radius: 0;
+  cursor: url("../../assets/img/shovel.png"), auto;
+  background-image: url("../../assets/img/grave.png");
+  background-size: cover;
+  img {
+    width: 64px;
+    margin-top: 24px;
+    border-radius: 50%;
+  }
 }
-.box-person.dead .avatar::before,
-.box-person.dead .avatar::after {
-  content: "";
-  position: absolute;
-  width: 100%;
-  height: 6px;
-  left: 0%;
-  top: 48%;
-  background-color: red;
+
+.box-person.dead .name {
+  transform: translateY(-108px);
+  font-size: 14px;
 }
+// .box-person.dead .avatar::before,
+// .box-person.dead .avatar::after {
+//   content: "";
+//   position: absolute;
+//   width: 100%;
+//   height: 6px;
+//   left: 0%;
+//   top: 48%;
+//   background-color: red;
+// }
 
 .box-person.alive:not(.selected) .avatar {
   cursor: url("../../assets/img/crosshair.png"), auto;
@@ -59,7 +72,7 @@ app-dynamite {
 .box-person.alive.selected .avatar {
   cursor: grab;
 }
-.box-person .name{
+.box-person .name {
   font-weight: 600;
   font-size: 18px;
 }

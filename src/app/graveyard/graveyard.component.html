@@ -1,1 +1,11 @@
-<p>graveyard works!</p>
+<div class="group-box-person" @fadeAnimation>
+  <ng-container *ngFor="let player of players | async">
+    <app-player
+      (onSelect)="onSelectHandler($event)"
+      (onDeselect)="onDeselectHandler($event)"
+      [player]="player"
+    ></app-player>
+  </ng-container>
+</div>
+
+<nav class="navbar fixed-bottom navbar-light bg-light"></nav>

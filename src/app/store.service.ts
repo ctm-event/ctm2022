@@ -22,8 +22,8 @@ const _players: Player[] = [
   },
   {
     _id: '63749da67843d5946a77ca9f',
-    name: 'Kemp Gordon',
-    avatar: 'avatar-default.jpg',
+    name: 'Arsen Truong',
+    avatar: 'arsen_truong.png',
     status: 'alive',
     luckyStar: 0,
   },
@@ -378,7 +378,7 @@ export class StoreService {
   }
 
   public updateBoomedPlayers(ids: string[]) {
-    const allPlayers = this.players.slice();
+    const allPlayers = this.players;
 
     ids.forEach((id) => {
       const index = allPlayers.findIndex((player) => {

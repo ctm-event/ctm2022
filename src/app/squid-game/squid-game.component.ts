@@ -15,9 +15,7 @@ export class SquidGameComponent implements OnInit {
   public selectedPlayers: string[] = [];
   public isDisplayActionBar: boolean = false;
 
-  constructor(private appService: AppService) {
-    // AppService.initialize();
-  }
+  constructor(private appService: AppService) {}
 
   ngOnInit(): void {
     this.players = this.appService.alivePlayers;
