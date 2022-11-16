@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { fadeAnimation } from '../animation/fade.animation';
 import { Player } from '../interface/player.interface';
-import { SquidGameService } from './squid-game.service';
+import { AppService } from '../app.service';
 
 @Component({
   selector: 'app-squid-game',
@@ -15,12 +15,12 @@ export class SquidGameComponent implements OnInit {
   public selectedPlayers: string[] = [];
   public isDisplayActionBar: boolean = false;
 
-  constructor(private squidGameService: SquidGameService) {
-    // squidGameService.initialize();
+  constructor(private appService: AppService) {
+    // AppService.initialize();
   }
 
   ngOnInit(): void {
-    this.players = this.squidGameService.alivePlayers;
+    this.players = this.appService.alivePlayers;
   }
 
   onSelectHandler(player: Player) {
@@ -36,12 +36,12 @@ export class SquidGameComponent implements OnInit {
   }
 
   boom() {
-    this.squidGameService.boom(this.selectedPlayers);
+    this.appService.boom(this.selectedPlayers);
     this.selectedPlayers = [];
   }
 
   revive() {
-    this.squidGameService.revive();
+    this.appService.revive();
   }
 
   private checkActionBar() {

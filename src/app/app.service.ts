@@ -1,16 +1,14 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { BehaviorSubject, filter, map, Observable, Subject } from 'rxjs';
-import { AppHelper } from '../app.helper';
-import { BombStyle } from '../constant/bomb-style.constant';
-import { Player } from '../interface/player.interface';
-import { PlayerStatus } from '../player/player-status.constant';
-import { StoreService } from '../store.service';
+import { map, Subject } from 'rxjs';
+import { AppHelper } from './app.helper';
+import { BombStyle } from './constant/bomb-style.constant';
+import { StoreService } from './store.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class SquidGameService {
+export class AppService {
   private _bombStyle: BombStyle = BombStyle.EXPLOSION;
 
   get bombStyle(): BombStyle {

@@ -12,7 +12,7 @@ import { takeUntil } from 'rxjs';
 import { BaseComponent } from 'src/app/base.component';
 import { environment } from 'src/environments/environment';
 import { SquidGameHelper } from '../../squid-game/squid-game.helper';
-import { SquidGameService } from '../../squid-game/squid-game.service';
+import { AppService } from '../../app.service';
 
 @Component({
   selector: 'app-dynamite',
@@ -38,7 +38,7 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
   private explosionLoaded: boolean = false;
 
   constructor(
-    private service: SquidGameService,
+    private service: AppService,
     private sanitizer: DomSanitizer,
     private helper: SquidGameHelper
   ) {

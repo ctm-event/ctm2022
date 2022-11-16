@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ExplosionIcons } from '../constant/bomb-icon.constant';
-import { SquidGameService } from './squid-game.service';
+import { AppService } from '../app.service';
 
 type Object = { [k: string]: any };
 
@@ -8,7 +8,7 @@ type Object = { [k: string]: any };
   providedIn: 'root',
 })
 export class SquidGameHelper {
-  constructor(private service: SquidGameService) {}
+  constructor(private service: AppService) {}
 
   getSelectedIcon() {
     const rand = this.getRandomInt(ExplosionIcons.length);

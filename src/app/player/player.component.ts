@@ -1,5 +1,4 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ComponentRef,
   ElementRef,
@@ -8,14 +7,13 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewContainerRef,
+  ViewContainerRef
 } from '@angular/core';
 import { takeUntil } from 'rxjs';
-import { fadeAnimation } from 'src/app/animation/fade.animation';
 import { BaseComponent } from 'src/app/base.component';
 import { Player } from 'src/app/interface/player.interface';
 import { AppHelper } from '../app.helper';
-import { SquidGameService } from '../squid-game/squid-game.service';
+import { AppService } from '../app.service';
 import { DynamiteComponent } from './dynamite/dynamite.component';
 
 @Component({
@@ -49,7 +47,7 @@ export class PlayerComponent extends BaseComponent implements OnInit {
   out: boolean = false;
 
   constructor(
-    private squidGameService: SquidGameService,
+    private appService: AppService,
     private elmRef: ElementRef,
     private helper: AppHelper
   ) {
@@ -57,7 +55,7 @@ export class PlayerComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.squidGameService.boom$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+    this.appService.boom$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       if (this.helper.isPlayerDead(this.player)) {
         this.out = true;
       }
