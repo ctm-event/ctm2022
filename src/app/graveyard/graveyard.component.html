@@ -1,10 +1,9 @@
 <div class="group-box-person" @fadeAnimation>
   <ng-container *ngFor="let player of players | async">
-    <app-player
+    <app-grave
       (onSelect)="onSelectHandler($event)"
-      (onDeselect)="onDeselectHandler($event)"
       [player]="player"
-    ></app-player>
+    ></app-grave>
   </ng-container>
 </div>
 

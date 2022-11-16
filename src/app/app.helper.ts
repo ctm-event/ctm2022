@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Player } from './interface/player.interface';
-import { PlayerStatus } from './player/player-status.constant';
+import { PlayerStatus } from './constant/player-status.constant';
 
 @Injectable({ providedIn: 'root' })
 export class AppHelper {

@@ -22,27 +22,5 @@ export class GraveyardComponent implements OnInit {
   }
 
   onSelectHandler(player: Player) {
-    this.selectedPlayers.push(player._id);
-    this.checkActionBar();
-  }
-
-  onDeselectHandler(player: Player) {
-    this.selectedPlayers = this.selectedPlayers.filter(
-      (id) => id !== player._id
-    );
-    this.checkActionBar();
-  }
-
-  boom() {
-    this.appService.boom(this.selectedPlayers);
-    this.selectedPlayers = [];
-  }
-
-  revive() {
-    this.appService.revive();
-  }
-
-  private checkActionBar() {
-    this.isDisplayActionBar = !!this.selectedPlayers.length;
   }
 }

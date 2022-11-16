@@ -45,25 +45,14 @@ export class AppService {
     return this.storeService.players$.asObservable();
   }
 
-  constructor(
-    private helper: AppHelper,
-    private storeService: StoreService,
-    private route: ActivatedRoute
-  ) {}
+  constructor(private helper: AppHelper, private storeService: StoreService) {}
 
   boom(ids: string[]): void {
-    this.storeService.updateBoomedPlayers(ids);
+    this.storeService.updatePlayersToDeadOrStandby(ids);
     this.boom$.next(true);
   }
 
   revive(): void {
     this.storeService.updatePlayersToAlive();
-  }
-
-  initialize() {
-    const players = this.route.snapshot.data['players'];
-    console.log(this.route.snapshot.data['players']);
-
-    this.storeService.players = players;
   }
 }

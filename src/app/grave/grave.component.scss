@@ -1,0 +1,30 @@
+.box-person {
+  width: 200px;
+  text-align: center;
+  margin: 12px;
+  position: relative;
+  transition: all linear 0.5s;
+  opacity: 0.5;
+  cursor: url("../../assets/img/shovel.png"), auto;
+}
+
+.avatar {
+  width: 200px;
+  height: 200px;
+  margin-bottom: 5px;
+  overflow: hidden;
+  position: relative;
+  background-image: url("../../assets/img/grave.png");
+  background-size: cover;
+  img {
+    width: 64px;
+    margin-top: 24px;
+    border-radius: 50%;
+  }
+}
+
+.box-person .name {
+  font-weight: 600;
+  transform: translateY(-108px);
+  font-size: 14px;
+}

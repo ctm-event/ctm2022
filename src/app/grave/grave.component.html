@@ -1,0 +1,9 @@
+<div
+  class="box-person dead animate__animated animate__faster animated__bounceIn"
+  (click)="onPlayerSelect($event)"
+>
+  <div class="avatar">
+    <img [src]="'assets/avatar/' + player.avatar" width="100%" alt="" />
+  </div>
+  <div class="name">{{ player.name }}</div>
+</div>

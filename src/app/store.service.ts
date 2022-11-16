@@ -7,7 +7,7 @@ import {
   Observable,
   of,
   Subject,
-  tap
+  tap,
 } from 'rxjs';
 import { AppHelper } from './app.helper';
 import { Player } from './interface/player.interface';
@@ -354,14 +354,14 @@ export class StoreService {
 
   set players(players: Player[]) {
     this._players = players;
-    this.players$.next(this._players);
+    this.players$.next([...this.players]);
   }
 
-  get players() {
-    return this._players.slice();
+  get players(): Player[] {
+    return [...this._players];
   }
 
-  public players$: Subject<Player[]> = new BehaviorSubject(this.players);
+  public players$: Subject<Player[]> = new BehaviorSubject<Player[]>([]);
 
   loadPlayers(): Observable<Player[]> {
     // TODO: replace with http request
@@ -377,7 +377,7 @@ export class StoreService {
     );
   }
 
-  public updateBoomedPlayers(ids: string[]) {
+  public updatePlayersToDeadOrStandby(ids: string[]) {
     const allPlayers = this.players;
 
     ids.forEach((id) => {
