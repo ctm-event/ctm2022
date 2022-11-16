@@ -1,4 +1,4 @@
-<div class="group-box-person">
+<div class="group-box-person" @fadeAnimation>
   <ng-container *ngFor="let player of players | async">
     <app-player
       (onSelect)="onSelectHandler($event)"
@@ -17,5 +17,11 @@
   >
     Boom!
   </button>
-  <button type="button" class="button-3d animate__animated animate__slideInUp animate__fastest" (click)="revive()">Revive</button>
+  <button
+    type="button"
+    class="button-3d animate__animated animate__slideInUp animate__fastest"
+    (click)="revive()"
+  >
+    Revive
+  </button>
 </nav>

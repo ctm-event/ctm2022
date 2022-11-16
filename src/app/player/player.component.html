@@ -1,9 +1,13 @@
 <div
-  [className]="'box-person ' + player.status"
-  [ngClass]="{ selected: player.selected }"
+  [className]="
+    'box-person ' +
+    player.status +
+    ' animate__animated animate__faster animated__bounceIn'
+  "
   (click)="onPlayerSelect($event)"
   [ngClass]="{
-    'animate__animated animate__fadeOut animate__faster': out
+    selected: player.selected,
+    animate__fadeOut: out
   }"
 >
   <div class="avatar">

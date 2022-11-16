@@ -11,8 +11,8 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs';
 import { BaseComponent } from 'src/app/base.component';
 import { environment } from 'src/environments/environment';
-import { SquidGameHelper } from '../../squid-game.helper';
-import { SquidGameService } from '../../squid-game.service';
+import { SquidGameHelper } from '../../squid-game/squid-game.helper';
+import { SquidGameService } from '../../squid-game/squid-game.service';
 
 @Component({
   selector: 'app-dynamite',
@@ -22,7 +22,7 @@ import { SquidGameService } from '../../squid-game.service';
 export class DynamiteComponent extends BaseComponent implements OnInit {
   @HostBinding('style') style: SafeStyle = {
     position: 'absolute',
-    cursor: 'grab'
+    cursor: 'grab',
   };
 
   @HostBinding('style.top')
@@ -31,17 +31,11 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
   @HostBinding('style.left')
   left: SafeStyle = this.sanitizer.bypassSecurityTrustStyle('0');
 
-  @Input() set x(value: string) {
-    this.left = value;
-  }
-
-  @Input() set y(value: string) {
-    this.top = value;
-  }
-
   @ViewChild('img', { read: ElementRef<HTMLImageElement> })
   imgTag!: ElementRef<HTMLImageElement>;
   public imgSrc!: string;
+
+  private explosionLoaded: boolean = false;
 
   constructor(
     private service: SquidGameService,
@@ -54,21 +48,27 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
 
   ngOnInit(): void {
     this.service.boom$.pipe(takeUntil(this.destroy$)).subscribe(() => {
+      this.explode = () => {
+        nativeElement.style.transform = 'scale(1.7)';
+        nativeElement.className =
+          'animate__animated animate__zoomIn animate__fast';
+        setTimeout(() => {
+          nativeElement.classList.add('animate__zoomOut');
+        }, 600);
+        setTimeout(() => {
+          this.deSelect();
+        }, 1000);
+      };
       const nativeElement = this.imgTag.nativeElement;
-      nativeElement.src = environment.baseHref + "/assets/img/explosion.png";
-      this.top = '0px';
-      this.left = '0px';
-      nativeElement.style.transform = 'scale(1.7)';
-      nativeElement.className =
-        'animate__animated animate__zoomIn animate__fast';
-      setTimeout(() => {
-        nativeElement.classList.add('animate__zoomOut');
-      }, 600);
-      setTimeout(() => {
-        this.deSelect();
-      }, 1000);
+      nativeElement.src = environment.baseHref + '/assets/img/explosion.png';
     });
   }
 
+  onLoad($event: Event) {
+    this.explode();
+  }
+
   deSelect(): void {}
+
+  explode(): void {}
 }

@@ -8,6 +8,7 @@ app-dynamite {
   text-align: center;
   margin: 12px;
   position: relative;
+  transition: all linear 0.5s;
 }
 
 .box-person.standby {
@@ -52,7 +53,7 @@ app-dynamite {
 }
 
 .box-person.alive:not(.selected) .avatar {
-  cursor: crosshair;
+  cursor: url("../../assets/img/crosshair.png"), auto;
 }
 
 .box-person.alive.selected .avatar {
@@ -70,7 +71,7 @@ app-dynamite {
   width: 40px;
   z-index: 999;
   height: 40px;
-  background-image: url("/assets/img/star.png");
+  background-image: url("../../assets/img/star.png");
   background-position: center;
   background-size: cover;
 }

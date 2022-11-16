@@ -1,4 +1,5 @@
 import {
+  ChangeDetectionStrategy,
   Component,
   ComponentRef,
   ElementRef,
@@ -7,13 +8,15 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { takeUntil } from 'rxjs';
+import { fadeAnimation } from 'src/app/animation/fade.animation';
 import { BaseComponent } from 'src/app/base.component';
-import { SquidGameService } from '../squid-game.service';
+import { Player } from 'src/app/interface/player.interface';
+import { AppHelper } from '../app.helper';
+import { SquidGameService } from '../squid-game/squid-game.service';
 import { DynamiteComponent } from './dynamite/dynamite.component';
-import { Player } from './player';
 
 @Component({
   selector: 'app-player',
@@ -47,21 +50,22 @@ export class PlayerComponent extends BaseComponent implements OnInit {
 
   constructor(
     private squidGameService: SquidGameService,
-    private elmRef: ElementRef
+    private elmRef: ElementRef,
+    private helper: AppHelper
   ) {
     super();
   }
 
   ngOnInit(): void {
     this.squidGameService.boom$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      if (this.squidGameService.isPlayerDead(this.player)) {
+      if (this.helper.isPlayerDead(this.player)) {
         this.out = true;
       }
     });
   }
 
   onPlayerSelect($event: MouseEvent) {
-    if (!this.squidGameService.isPLayerAlive(this.player)) return;
+    if (!this.helper.isPLayerAlive(this.player)) return;
 
     if (!!this.player.selected) {
       this.deSelect();

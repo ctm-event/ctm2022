@@ -1,6 +1,6 @@
 
-export type Player = {
-  id: number;
+export interface Player {
+  _id: string;
   name: string;
   avatar: string;
   luckyStar: number;

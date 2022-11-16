@@ -1,44 +1,16 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, filter, map, Subject } from 'rxjs';
+import { ActivatedRoute } from '@angular/router';
+import { BehaviorSubject, filter, map, Observable, Subject } from 'rxjs';
+import { AppHelper } from '../app.helper';
 import { BombStyle } from '../constant/bomb-style.constant';
-import { Player } from './player/player';
-import { PlayerStatus } from './player/player-status.constant';
+import { Player } from '../interface/player.interface';
+import { PlayerStatus } from '../player/player-status.constant';
+import { StoreService } from '../store.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class SquidGameService {
-  private _players: Player[] = [
-    {
-      id: 123,
-      name: 'name1',
-      avatar: 'avatar-default.jpg',
-      luckyStar: 0,
-      status: 'standby',
-    },
-    {
-      id: 124,
-      name: 'name2',
-      avatar: 'avatar-default.jpg',
-      luckyStar: 1,
-      status: 'alive',
-    },
-    {
-      id: 125,
-      name: 'name3',
-      avatar: 'avatar-default.jpg',
-      luckyStar: 0,
-      status: 'alive',
-    },
-    {
-      id: 126,
-      name: 'name4',
-      avatar: 'avatar-default.jpg',
-      luckyStar: 0,
-      status: 'alive',
-    },
-  ];
-
   private _bombStyle: BombStyle = BombStyle.EXPLOSION;
 
   get bombStyle(): BombStyle {
@@ -49,98 +21,51 @@ export class SquidGameService {
     this.bombStyle = value;
   }
 
-  public players$: Subject<Player[]> = new BehaviorSubject(
-    this._players.slice()
-  );
   public boom$: Subject<any> = new Subject();
 
-  get players() {
-    return this.players$.asObservable();
-  }
-
   get alivePlayers() {
-    return this.players$.asObservable().pipe(
+    return this.storeService.players$.asObservable().pipe(
       map((players) => {
         return players.filter(
-          (player) => this.isPLayerAlive(player) || this.isPlayerStandby(player)
+          (player) =>
+            this.helper.isPLayerAlive(player) ||
+            this.helper.isPlayerStandby(player)
         );
       })
     );
   }
 
-  constructor() {}
+  get deadPlayers() {
+    return this.storeService.players$.asObservable().pipe(
+      map((players) => {
+        return players.filter((player) => this.helper.isPlayerDead(player));
+      })
+    );
+  }
 
-  boom(ids: number[]): void {
-    ids.forEach((id) => {
-      const index = this._players.findIndex((player) => {
-        return player.id === id;
-      });
+  get allPlayers() {
+    return this.storeService.players$.asObservable();
+  }
 
-      if (index === -1) {
-        return;
-      }
+  constructor(
+    private helper: AppHelper,
+    private storeService: StoreService,
+    private route: ActivatedRoute
+  ) {}
 
-      if (this.isPLayerAlive(this._players[index])) {
-        this._players[index] = this.executePlayer(this._players[index]);
-      }
-    });
-
+  boom(ids: string[]): void {
+    this.storeService.updateBoomedPlayers(ids);
     this.boom$.next(true);
-    setTimeout(() => {
-      this.players$.next(this._players);
-    }, 1000);
   }
 
   revive(): void {
-    this._players.forEach((player) => {
-      if (this.isPlayerStandby(player)) {
-        player = this.setToAlive(player);
-      }
-    });
-    this.players$.next(this._players);
+    this.storeService.updatePlayersToAlive();
   }
 
-  executePlayer(player: Player): Player {
-    player.selected = false;
+  initialize() {
+    const players = this.route.snapshot.data['players'];
+    console.log(this.route.snapshot.data['players']);
 
-    return this.hasLuckyStar(player)
-      ? this.setToStandBy(player)
-      : this.setToDead(player);
-  }
-
-  public isPLayerAlive(player: Player): boolean {
-    return player.status === PlayerStatus.ALIVE;
-  }
-
-  public isPlayerSelected(player: Player) {
-    return !!player.selected;
-  }
-
-  public isPlayerStandby(player: Player): boolean {
-    return player.status === PlayerStatus.STANDBY;
-  }
-
-  public isPlayerDead(player: Player): boolean {
-    return player.status === PlayerStatus.DEAD;
-  }
-
-  public hasLuckyStar(player: Player): boolean {
-    return player.luckyStar > 0;
-  }
-
-  private setToStandBy(player: Player): Player {
-    player.luckyStar -= 1;
-    player.status = PlayerStatus.STANDBY;
-    return player;
-  }
-
-  private setToDead(player: Player): Player {
-    player.status = PlayerStatus.DEAD;
-    return player;
-  }
-
-  private setToAlive(player: Player): Player {
-    player.status = PlayerStatus.ALIVE;
-    return player;
+    this.storeService.players = players;
   }
 }
