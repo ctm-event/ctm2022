@@ -7,7 +7,7 @@ import {
   OnInit,
   Output,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { takeUntil } from 'rxjs';
 import { BaseComponent } from 'src/app/base.component';
@@ -62,7 +62,7 @@ export class PlayerComponent extends BaseComponent implements OnInit {
     });
   }
 
-  onPlayerSelect($event: MouseEvent) {
+  onPlayerSelect() {
     if (!this.helper.isPLayerAlive(this.player)) return;
 
     if (!!this.player.selected) {
@@ -70,10 +70,10 @@ export class PlayerComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    this.select($event);
+    this.select();
   }
 
-  select($event: MouseEvent) {
+  select() {
     const elmRect = this.elmRef.nativeElement.getBoundingClientRect();
     this.player.selected = true;
     this.dynamiteCmpRef = this.placeHolder.createComponent(DynamiteComponent);

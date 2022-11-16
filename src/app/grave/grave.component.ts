@@ -40,7 +40,7 @@ export class GraveComponent implements OnInit {
 
   }
 
-  onPlayerSelect($event: MouseEvent) {
+  reborn() {
   }
 
 }
