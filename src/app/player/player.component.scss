@@ -11,10 +11,6 @@ app-dynamite {
   transition: all linear 0.5s;
 }
 
-.box-person.standby {
-  opacity: 0.5;
-}
-
 .box-person.dead {
   opacity: 0;
   transform: scale(0.95);
@@ -31,7 +27,7 @@ app-dynamite {
 }
 
 .box-person.standby .avatar {
-  border: 6px solid darkorange;
+  border: 6px solid #ffcf94;
   cursor: not-allowed;
 }
 

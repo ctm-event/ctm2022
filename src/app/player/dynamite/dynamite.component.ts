@@ -35,8 +35,6 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
   imgTag!: ElementRef<HTMLImageElement>;
   public imgSrc!: string;
 
-  private explosionLoaded: boolean = false;
-
   constructor(
     private service: AppService,
     private sanitizer: DomSanitizer,
@@ -64,7 +62,7 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
     });
   }
 
-  onLoad($event: Event) {
+  onLoad() {
     this.explode();
   }
 

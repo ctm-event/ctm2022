@@ -36,6 +36,7 @@ export class SquidGameComponent implements OnInit {
   boom() {
     this.appService.boom(this.selectedPlayers);
     this.selectedPlayers = [];
+    this.checkActionBar();
   }
 
   revive() {

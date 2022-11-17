@@ -25,18 +25,25 @@ export class AppHelper {
   }
 
   setToStandBy(player: Player): Player {
-    player.luckyStar -= 1;
-    player.status = PlayerStatus.STANDBY;
-    return player;
+    const luckyStar = player.luckyStar - 1;
+    return {
+      ...player,
+      luckyStar,
+      status: PlayerStatus.STANDBY,
+    };
   }
 
   setToDead(player: Player): Player {
-    player.status = PlayerStatus.DEAD;
-    return player;
+    return {
+      ...player,
+      status: PlayerStatus.DEAD,
+    };
   }
 
   setToAlive(player: Player): Player {
-    player.status = PlayerStatus.ALIVE;
-    return player;
+    return {
+      ...player,
+      status: PlayerStatus.ALIVE,
+    };
   }
 }

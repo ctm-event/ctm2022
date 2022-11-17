@@ -22,8 +22,8 @@ const _players: Player[] = [
   },
   {
     _id: '63749da67843d5946a77ca9f',
-    name: 'Arsen Truong',
-    avatar: 'arsen_truong.png',
+    name: 'Arsenal',
+    avatar: 'avatar-default.jpg',
     status: 'alive',
     luckyStar: 0,
   },
@@ -354,7 +354,7 @@ export class StoreService {
 
   set players(players: Player[]) {
     this._players = players;
-    this.players$.next([...this.players]);
+    this.players$.next(this.players);
   }
 
   get players(): Player[] {
@@ -400,10 +400,10 @@ export class StoreService {
   }
 
   updatePlayersToAlive() {
-    const allPlayers = this.players.slice();
-    allPlayers.forEach((player) => {
+    const allPlayers = this.players;
+    allPlayers.forEach((player, index) => {
       if (this.helper.isPlayerStandby(player)) {
-        player = this.helper.setToAlive(player);
+        allPlayers[index] = this.helper.setToAlive(player);
       }
     });
 
@@ -411,8 +411,6 @@ export class StoreService {
   }
 
   executePlayer(player: Player): Player {
-    player.selected = false;
-
     return this.helper.hasLuckyStar(player)
       ? this.helper.setToStandBy(player)
       : this.helper.setToDead(player);

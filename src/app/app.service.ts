@@ -55,4 +55,13 @@ export class AppService {
   revive(): void {
     this.storeService.updatePlayersToAlive();
   }
+
+  reborn(id: string): void {
+    const allPlayers = this.storeService.players;
+    const updatePlayer = allPlayers.find((player) => player._id === id);
+
+    if (!updatePlayer) return;
+
+
+  }
 }

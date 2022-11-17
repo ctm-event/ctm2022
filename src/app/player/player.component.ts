@@ -1,17 +1,16 @@
 import {
   Component,
-  ComponentRef,
-  ElementRef,
-  EventEmitter,
+  ComponentRef, EventEmitter,
   Input,
   OnInit,
   Output,
   ViewChild,
-  ViewContainerRef,
+  ViewContainerRef
 } from '@angular/core';
-import { takeUntil } from 'rxjs';
+import { filter, takeUntil } from 'rxjs';
 import { BaseComponent } from 'src/app/base.component';
 import { Player } from 'src/app/interface/player.interface';
+import { fadeAnimation } from '../animation/fade.animation';
 import { AppHelper } from '../app.helper';
 import { AppService } from '../app.service';
 import { DynamiteComponent } from './dynamite/dynamite.component';
@@ -20,13 +19,14 @@ import { DynamiteComponent } from './dynamite/dynamite.component';
   selector: 'app-player',
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss'],
+  animations: [fadeAnimation],
 })
 export class PlayerComponent extends BaseComponent implements OnInit {
   private _player!: Player;
 
   @Input()
-  set player(value: Player) {
-    this._player = value;
+  set player(input: Player) {
+    this._player = { ...input };
   }
 
   get player(): Player {
@@ -48,18 +48,20 @@ export class PlayerComponent extends BaseComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private elmRef: ElementRef,
     private helper: AppHelper
   ) {
     super();
   }
 
   ngOnInit(): void {
-    this.appService.boom$.pipe(takeUntil(this.destroy$)).subscribe(() => {
-      if (this.helper.isPlayerDead(this.player)) {
+    this.appService.boom$
+      .pipe(
+        filter(() => this.helper.isPlayerSelected(this.player)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
         this.out = true;
-      }
-    });
+      });
   }
 
   onPlayerSelect() {
@@ -74,7 +76,6 @@ export class PlayerComponent extends BaseComponent implements OnInit {
   }
 
   select() {
-    const elmRect = this.elmRef.nativeElement.getBoundingClientRect();
     this.player.selected = true;
     this.dynamiteCmpRef = this.placeHolder.createComponent(DynamiteComponent);
     this.dynamiteCmpRef.instance.deSelect = () => this.deSelect();
