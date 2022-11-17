@@ -1,4 +1,4 @@
-<div class="group-box-person" @fadeAnimation>
+<div class="group-box-person">
   <ng-container *ngFor="let player of players | async">
     <app-player
       (onSelect)="onSelectHandler($event)"

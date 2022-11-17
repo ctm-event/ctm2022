@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { map, Subject } from 'rxjs';
+import { map, of, Subject } from 'rxjs';
 import { AppHelper } from './app.helper';
 import { BombStyle } from './constant/bomb-style.constant';
+import { Player } from './interface/player.interface';
 import { StoreService } from './store.service';
 
 @Injectable({
@@ -48,20 +48,57 @@ export class AppService {
   constructor(private helper: AppHelper, private storeService: StoreService) {}
 
   boom(ids: string[]): void {
-    this.storeService.updatePlayersToDeadOrStandby(ids);
+    const allPlayers = this.storeService.players;
+
+    ids.forEach((id) => {
+      const index = allPlayers.findIndex((player) => {
+        return player._id === id;
+      });
+
+      if (index === -1) {
+        return;
+      }
+
+      if (this.helper.isPLayerAlive(allPlayers[index])) {
+        allPlayers[index] = this.updatePlayerToDeadOrStandby(allPlayers[index]);
+      }
+    });
+
     this.boom$.next(true);
+
+    // savePlayersWithTimeout: Give it some time to perform animation
+    this.storeService.savePlayersWithTimeout(allPlayers);
   }
 
   revive(): void {
-    this.storeService.updatePlayersToAlive();
+    this.updatePlayersToAlive();
   }
 
   reborn(id: string): void {
     const allPlayers = this.storeService.players;
-    const updatePlayer = allPlayers.find((player) => player._id === id);
+    const index = allPlayers.findIndex((player) => player._id === id);
 
-    if (!updatePlayer) return;
+    if (index === -1) return;
 
+    allPlayers[index] = this.helper.setToAlive(allPlayers[index]);
+    this.storeService.savePlayersWithTimeout(allPlayers, 300);
+  }
 
+  private updatePlayerToDeadOrStandby(player: Player): Player {
+    return this.helper.hasLuckyStar(player)
+      ? this.helper.setToStandBy(player)
+      : this.helper.setToDead(player);
+  }
+
+  private updatePlayersToAlive() {
+    const allPlayers = this.storeService.players;
+
+    allPlayers.forEach((player, index) => {
+      if (this.helper.isPlayerStandby(player)) {
+        allPlayers[index] = this.helper.setToAlive(player);
+      }
+    });
+
+    this.storeService.players = allPlayers;
   }
 }

@@ -7,7 +7,7 @@ import {
   Observable,
   of,
   Subject,
-  tap,
+  tap
 } from 'rxjs';
 import { AppHelper } from './app.helper';
 import { Player } from './interface/player.interface';
@@ -24,28 +24,28 @@ const _players: Player[] = [
     _id: '63749da67843d5946a77ca9f',
     name: 'Arsenal',
     avatar: 'avatar-default.jpg',
-    status: 'alive',
+    status: 'dead',
     luckyStar: 0,
   },
   {
     _id: '63749da66551810fb6c24930',
-    name: 'Rocha Mcneil',
+    name: 'Liverpool',
     avatar: 'avatar-default.jpg',
-    status: 'alive',
+    status: 'dead',
     luckyStar: 0,
   },
   {
     _id: '63749da6a9a7aa12ee781410',
-    name: 'Roslyn Kramer',
+    name: 'ManU',
     avatar: 'avatar-default.jpg',
-    status: 'alive',
+    status: 'dead',
     luckyStar: 1,
   },
   {
     _id: '63749da6f7bc477a359b09a9',
-    name: 'Tonia Dalton',
+    name: 'Man City',
     avatar: 'avatar-default.jpg',
-    status: 'alive',
+    status: 'dead',
     luckyStar: 0,
   },
   {
@@ -377,42 +377,9 @@ export class StoreService {
     );
   }
 
-  public updatePlayersToDeadOrStandby(ids: string[]) {
-    const allPlayers = this.players;
-
-    ids.forEach((id) => {
-      const index = allPlayers.findIndex((player) => {
-        return player._id === id;
-      });
-
-      if (index === -1) {
-        return;
-      }
-
-      if (this.helper.isPLayerAlive(allPlayers[index])) {
-        allPlayers[index] = this.executePlayer(allPlayers[index]);
-      }
-    });
-
+  savePlayersWithTimeout(players: Player[], timeout: number = 1000) {
     setTimeout(() => {
-      this.players = allPlayers;
-    }, 1000);
-  }
-
-  updatePlayersToAlive() {
-    const allPlayers = this.players;
-    allPlayers.forEach((player, index) => {
-      if (this.helper.isPlayerStandby(player)) {
-        allPlayers[index] = this.helper.setToAlive(player);
-      }
-    });
-
-    this.players = allPlayers;
-  }
-
-  executePlayer(player: Player): Player {
-    return this.helper.hasLuckyStar(player)
-      ? this.helper.setToStandBy(player)
-      : this.helper.setToDead(player);
+      this.players = players;
+    }, timeout);
   }
 }
