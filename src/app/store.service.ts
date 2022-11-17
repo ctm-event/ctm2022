@@ -412,6 +412,10 @@ export class StoreService {
 
   loadPlayers(): Observable<Player[]> {
     // TODO: replace with http request
+    // return this.http.get<Player[]>(
+    //   'https://limitless-ocean-07338.herokuapp.com/api/players'
+    // );
+
     return of(_players).pipe(
       delay(500),
       tap((_players) => {

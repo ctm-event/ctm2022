@@ -28,6 +28,11 @@
       min="0"
     />
   </form>
+  <div>
+    <span *ngFor="let selectedPlayer of selectedPlayers">
+      {{ selectedPlayer.playerNumber }}
+    </span>
+  </div>
   <button
     type="button"
     class="button-3d animate__animated animate__slideInUp animate__fastest"

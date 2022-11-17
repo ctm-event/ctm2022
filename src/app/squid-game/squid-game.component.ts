@@ -17,9 +17,8 @@ import { SquidGameService } from './squid-game.service';
 export class SquidGameComponent extends BaseComponent implements OnInit {
   public players$!: Observable<any>;
   public players!: Player[];
-  public selectedPlayers: string[] = [];
+  public selectedPlayers: Player[] = [];
   public isDisplayActionBar: boolean = false;
-  playersNumbers: number[] = [];
 
   public addSelectedPlayersForm = new FormGroup({
     playerNumber: new FormControl('', [
@@ -41,19 +40,20 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
   }
 
   onSelectHandler(player: Player) {
-    this.selectedPlayers.push(player._id);
+    this.selectedPlayers.push(player);
     this.checkActionBar();
   }
 
   onDeselectHandler(player: Player) {
     this.selectedPlayers = this.selectedPlayers.filter(
-      (id) => id !== player._id
+      (selectedPlayer) => selectedPlayer._id !== player._id
     );
     this.checkActionBar();
   }
 
   boom() {
-    this.appService.boom(this.selectedPlayers);
+    const ids: string[] = this.selectedPlayers.map((player) => player._id);
+    this.appService.boom(ids);
     this.selectedPlayers = [];
     this.checkActionBar();
   }
@@ -67,7 +67,6 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log('here');
     if (this.addSelectedPlayersForm.invalid) {
       return;
     }
@@ -81,8 +80,5 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
 
   private initiliaze() {
     this.players$ = this.appService.alivePlayers.pipe(shareReplay());
-    this.players$.pipe(shareReplay()).subscribe((players: Player[]) => {
-      this.players = players;
-    });
   }
 }

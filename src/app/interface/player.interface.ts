@@ -7,4 +7,5 @@ export interface Player {
   status: string;
   selected?: boolean;
   playerNumber: number;
+  __v?: number;
 };
