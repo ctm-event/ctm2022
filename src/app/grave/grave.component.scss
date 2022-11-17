@@ -4,7 +4,6 @@
   margin: 12px;
   position: relative;
   transition: all linear 0.5s;
-  opacity: 0.5;
   cursor: url("../../assets/img/shovel.png"), auto;
 }
 
@@ -14,17 +13,21 @@
   margin-bottom: 5px;
   overflow: hidden;
   position: relative;
-  background-image: url("../../assets/img/grave.png");
-  background-size: cover;
-  img {
-    width: 64px;
-    margin-top: 24px;
-    border-radius: 50%;
+  background-image: url("../../assets/img/gravestone.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  z-index: 1;
+  .name {
+    position: absolute;
+    right: 40px;
+    width: 62px;
+    text-align: center;
+    top: 50px;
+    font-weight: 900;
+    font-size: 24px;
+    z-index: 1;
+    color: #fff;
+    transform: rotateY(25deg);
+    letter-spacing: 2px;
   }
-}
-
-.box-person .name {
-  font-weight: 600;
-  transform: translateY(-108px);
-  font-size: 14px;
 }
