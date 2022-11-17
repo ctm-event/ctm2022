@@ -41,13 +41,13 @@ app-dynamite {
 }
 .star {
   position: absolute;
-  bottom: 2px;
+  bottom: 5px;
   left: 50%;
   transform: translateX(-50%);
   width: 40px;
   z-index: 999;
   height: 40px;
-  background-image: url("../../assets/img/star.png");
+  background-image: url("../../assets/img/love.png");
   background-position: center;
   background-size: cover;
 }
