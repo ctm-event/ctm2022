@@ -14,3 +14,24 @@ app-player {
 .box-person {
   transition: 1s all linear;
 }
+
+.custom-input{
+  width: 184px;
+}
+
+.list-number-select{
+  margin: 4px;
+  padding: 3px 10px;
+  width: 40px;
+  background-color: rgb(4, 30, 66);
+  color: #fff;
+  text-align: center;
+  border-radius: 8px;
+  display: inline-block;
+}
+
+.box-input-form{
+  display: flex;
+  flex-wrap: nowrap;
+  width: calc(100% - 300px);
+}

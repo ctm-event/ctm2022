@@ -2,11 +2,11 @@
     'box-person ' + player.status + ' animate__animated animate__fastest'
   " (click)="onPlayerSelect()" [ngClass]="{
     selected: player.selected,
-    animate__fadeOut: out,
-    ' border-love': !!player.luckyStar
+    animate__fadeOut: out
   }">
+  <div class="star" *ngIf="!!player.luckyStar"></div>
+  <div class="number">{{player.playerNumber}}</div>
   <div class="avatar">
-    <div class="number">31</div>
     <img [src]="'assets/avatar/' + player.avatar" width="100%" alt="" />
   </div>
   <!-- <div class="name">{{ player.playerNumber }} {{ player.name }}</div> -->
