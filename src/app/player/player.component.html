@@ -1,18 +1,14 @@
-<div
-  @fadeAnimation
-  [className]="
+<div @fadeAnimation [className]="
     'box-person ' + player.status + ' animate__animated animate__fastest'
-  "
-  (click)="onPlayerSelect()"
-  [ngClass]="{
+  " (click)="onPlayerSelect()" [ngClass]="{
     selected: player.selected,
-    animate__fadeOut: out
-  }"
->
+    animate__fadeOut: out,
+    ' border-love': !!player.luckyStar
+  }">
   <div class="avatar">
-    <div class="star" *ngIf="!!player.luckyStar"></div>
+    <div class="number">31</div>
     <img [src]="'assets/avatar/' + player.avatar" width="100%" alt="" />
   </div>
-  <div class="name">{{ player.playerNumber }} {{ player.name }}</div>
+  <!-- <div class="name">{{ player.playerNumber }} {{ player.name }}</div> -->
 </div>
 <ng-container #placeHolder></ng-container>
