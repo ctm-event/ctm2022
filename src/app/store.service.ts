@@ -24,7 +24,6 @@ export class StoreService {
 
   set players(players: Player[]) {
     this._players = players;
-    this.storePlayers();
     this.players$.next(this.players);
   }
 
@@ -43,10 +42,12 @@ export class StoreService {
     );
   }
 
-  storePlayers() {
-    this.http
-      .patch<Player[]>(environment.apiUrl, this.players)
-      .subscribe(noop);
+  updateAllPlayers() {
+    this.http.patch<Player[]>(environment.apiUrl, this.players).subscribe(noop);
+  }
+
+  updatePlayers(players: Player[]) {
+    this.http.patch<Player[]>(environment.apiUrl, players).subscribe(noop);
   }
 
   savePlayersWithTimeout(players: Player[], timeout: number = 1000) {

@@ -49,7 +49,7 @@ export class AppService {
 
   boom(ids: string[]): void {
     const allPlayers = this.storeService.players;
-
+    const updatedPlayers: Player[] = [];
     ids.forEach((id) => {
       const index = allPlayers.findIndex((player) => {
         return player._id === id;
@@ -60,9 +60,17 @@ export class AppService {
       }
 
       if (this.helper.isPLayerAlive(allPlayers[index])) {
-        allPlayers[index] = this.updatePlayerToDeadOrStandby(allPlayers[index]);
+        const updatedPlayer = this.updatePlayerToDeadOrStandby(
+          allPlayers[index]
+        );
+        updatedPlayers.push(updatedPlayer);
+        allPlayers[index] = updatedPlayer;
       }
     });
+
+    if (!!updatedPlayers.length) {
+      this.storeService.updatePlayers(updatedPlayers);
+    }
 
     this.boom$.next(true);
 
@@ -80,7 +88,10 @@ export class AppService {
 
     if (index === -1) return;
 
-    allPlayers[index] = this.helper.setToAlive(allPlayers[index]);
+    const updated = this.helper.setToAlive(allPlayers[index]);
+    allPlayers[index] = updated;
+    this.storeService.updatePlayers([updated]);
+
     this.storeService.savePlayersWithTimeout(allPlayers, 300);
   }
 
@@ -92,12 +103,18 @@ export class AppService {
 
   private updatePlayersToAlive() {
     const allPlayers = this.storeService.players;
+    const updatedPlayers: Player[] = [];
 
     allPlayers.forEach((player, index) => {
       if (this.helper.isPlayerStandby(player)) {
         allPlayers[index] = this.helper.setToAlive(player);
+        updatedPlayers.push(allPlayers[index]);
       }
     });
+
+    if (!!updatedPlayers.length) {
+      this.storeService.updatePlayers(updatedPlayers);
+    }
 
     this.storeService.players = allPlayers;
   }
