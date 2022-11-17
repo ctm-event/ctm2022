@@ -1,14 +1,12 @@
 <div
   @fadeAnimation
   [className]="
-    'box-person ' +
-    player.status +
-    ' animate__animated animate__faster'
+    'box-person ' + player.status + ' animate__animated animate__fastest'
   "
   (click)="onPlayerSelect()"
   [ngClass]="{
     selected: player.selected,
-    animate__fadeOut: out
+    'animate__fadeOut': out
   }"
 >
   <div class="avatar">

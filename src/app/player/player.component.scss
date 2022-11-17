@@ -10,7 +10,9 @@ app-dynamite {
   position: relative;
   transition: all linear 0.5s;
 }
-
+.animate__fadeOut {
+  transform: scale(0.5);
+}
 .avatar {
   width: 200px;
   height: 200px;
