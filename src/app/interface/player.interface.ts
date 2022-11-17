@@ -6,4 +6,5 @@ export interface Player {
   luckyStar: number;
   status: string;
   selected?: boolean;
+  playerNumber: number;
 };

@@ -6,13 +6,13 @@
   (click)="onPlayerSelect()"
   [ngClass]="{
     selected: player.selected,
-    'animate__fadeOut': out
+    animate__fadeOut: out
   }"
 >
   <div class="avatar">
     <div class="star" *ngIf="!!player.luckyStar"></div>
     <img [src]="'assets/avatar/' + player.avatar" width="100%" alt="" />
   </div>
-  <div class="name">{{ player.name }}</div>
+  <div class="name">{{ player.playerNumber }} {{ player.name }}</div>
 </div>
 <ng-container #placeHolder></ng-container>

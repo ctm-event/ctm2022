@@ -1,5 +1,5 @@
 <div class="group-box-person">
-  <ng-container *ngFor="let player of players | async">
+  <ng-container *ngFor="let player of players$ | async">
     <app-player
       (onSelect)="onSelectHandler($event)"
       (onDeselect)="onDeselectHandler($event)"
@@ -17,6 +17,17 @@
   >
     Boom!
   </button>
+  <form (submit)="onSubmit()" [formGroup]="addSelectedPlayersForm">
+    <input
+      type="number"
+      name="palyerId"
+      id="playerId"
+      class="text"
+      formControlName="playerNumber"
+      max="99"
+      min="0"
+    />
+  </form>
   <button
     type="button"
     class="button-3d animate__animated animate__slideInUp animate__fastest"

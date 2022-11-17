@@ -1,11 +1,12 @@
 import {
   Component,
-  ComponentRef, EventEmitter,
+  ComponentRef,
+  EventEmitter,
   Input,
   OnInit,
   Output,
   ViewChild,
-  ViewContainerRef
+  ViewContainerRef,
 } from '@angular/core';
 import { filter, takeUntil } from 'rxjs';
 import { BaseComponent } from 'src/app/base.component';
@@ -13,6 +14,7 @@ import { Player } from 'src/app/interface/player.interface';
 import { fadeAnimation } from '../animation/fade.animation';
 import { AppHelper } from '../app.helper';
 import { AppService } from '../app.service';
+import { SquidGameService } from '../squid-game/squid-game.service';
 import { DynamiteComponent } from './dynamite/dynamite.component';
 
 @Component({
@@ -48,7 +50,8 @@ export class PlayerComponent extends BaseComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private helper: AppHelper
+    private helper: AppHelper,
+    private squidGameService: SquidGameService
   ) {
     super();
   }
@@ -61,6 +64,15 @@ export class PlayerComponent extends BaseComponent implements OnInit {
       )
       .subscribe(() => {
         this.out = true;
+      });
+
+    this.squidGameService.addSelectedPlayer$
+      .pipe(
+        filter((playerNumber) => this.player.playerNumber === playerNumber),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(() => {
+        this.onPlayerSelect();
       });
   }
 

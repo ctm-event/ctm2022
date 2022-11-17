@@ -39,7 +39,7 @@ export class GraveComponent implements OnInit {
   ngOnInit(): void {}
 
   reborn() {
-    this.wrapper.nativeElement.classList.add('animate__backOutLeft');
+    this.wrapper.nativeElement.classList.add('animate__fadeOutUp');
     this.appService.reborn(this.player._id);
   }
 }
