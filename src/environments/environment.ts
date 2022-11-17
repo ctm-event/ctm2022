@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  baseHref: ''
+  baseHref: '',
+  apiUrl: 'https://limitless-ocean-07338.herokuapp.com/api/players/',
 };
 
 /*
