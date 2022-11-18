@@ -21,7 +21,7 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
   public isDisplayActionBar: boolean = false;
 
   public addSelectedPlayersForm = new FormGroup({
-    playerNumber: new FormControl('', [
+    number: new FormControl('', [
       Validators.required,
       Validators.pattern('^[0-9]*$'),
       Validators.maxLength(2),
@@ -71,10 +71,10 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
       return;
     }
 
-    const formControl = this.addSelectedPlayersForm.get('playerNumber')!;
-    const playerNumber = +formControl.value!;
+    const formControl = this.addSelectedPlayersForm.get('number')!;
+    const number = +formControl.value!;
 
-    this.squidGameService.addSelectedPlayer$.next(playerNumber);
+    this.squidGameService.addSelectedPlayer$.next(number);
     formControl.setValue('');
   }
 

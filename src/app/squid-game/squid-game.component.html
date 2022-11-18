@@ -17,11 +17,11 @@
   >
     Boom!
   </button>
-  
+
   <div class="box-input-form">
     <div style="flex: 1 1 auto;" class="flex-auto">
       <span class="list-number-select" *ngFor="let selectedPlayer of selectedPlayers">
-        {{ selectedPlayer.playerNumber }}
+        {{ selectedPlayer.number }}
       </span>
     </div>
 
@@ -31,10 +31,10 @@
         name="palyerId"
         id="playerId"
         class="form-control custom-input"
-        formControlName="playerNumber"
+        formControlName="number"
         max="99"
         min="0"
-        placeholder="Enter PlayerNumber"
+        placeholder="Enter number"
       />
       <div class="mt-3"><span>total: 4/61</span> - <span>Star: 6</span></div>
     </form>

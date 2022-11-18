@@ -96,7 +96,7 @@ export class AppService {
   }
 
   private updatePlayerToDeadOrStandby(player: Player): Player {
-    return this.helper.hasLuckyStar(player)
+    return this.helper.hasstar(player)
       ? this.helper.setToStandBy(player)
       : this.helper.setToDead(player);
   }

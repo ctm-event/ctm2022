@@ -68,7 +68,7 @@ export class PlayerComponent extends BaseComponent implements OnInit {
 
     this.squidGameService.addSelectedPlayer$
       .pipe(
-        filter((playerNumber) => this.player.playerNumber === playerNumber),
+        filter((number) => this.player.number === number),
         takeUntil(this.destroy$)
       )
       .subscribe(() => {

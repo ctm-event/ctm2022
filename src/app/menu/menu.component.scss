@@ -1,8 +1,16 @@
-.navbar.nav-primary-contemi{
-    background-color: rgb(4, 30, 66);
+.navbar.nav-primary-contemi {
+  background-color: rgb(4, 30, 66);
+  color: #fff;
+  font-weight: 600;
+  .nav-link {
     color: #fff;
-    font-weight: 600;
-    .nav-link{
-        color: #fff;
-    }
+  }
+}
+
+.brand-name {
+  display: inline-block;
+  color: #041e42;
+  background: #fff;
+  padding: 0px 12px;
+  font-weight: 700;
 }

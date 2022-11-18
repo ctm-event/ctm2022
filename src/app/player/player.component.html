@@ -4,11 +4,11 @@
     selected: player.selected,
     animate__fadeOut: out
   }">
-  <div class="star" *ngIf="!!player.luckyStar"></div>
-  <div class="number">{{player.playerNumber}}</div>
+  <div class="star" *ngIf="!!player.star"></div>
+  <div class="number">{{player.number}}</div>
   <div class="avatar">
     <img [src]="'assets/avatar/' + player.avatar" width="100%" alt="" />
   </div>
-  <!-- <div class="name">{{ player.playerNumber }} {{ player.name }}</div> -->
+  <!-- <div class="name">{{ player.number }} {{ player.name }}</div> -->
 </div>
 <ng-container #placeHolder></ng-container>

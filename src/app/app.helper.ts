@@ -20,15 +20,15 @@ export class AppHelper {
     return player.status === PlayerStatus.DEAD;
   }
 
-  hasLuckyStar(player: Player): boolean {
-    return player.luckyStar > 0;
+  hasstar(player: Player): boolean {
+    return player.star > 0;
   }
 
   setToStandBy(player: Player): Player {
-    const luckyStar = player.luckyStar - 1;
+    const star = player.star - 1;
     return {
       ...player,
-      luckyStar,
+      star,
       status: PlayerStatus.STANDBY,
     };
   }

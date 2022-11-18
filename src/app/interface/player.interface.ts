@@ -3,9 +3,9 @@ export interface Player {
   _id: string;
   name: string;
   avatar: string;
-  luckyStar: number;
+  star: number;
   status: string;
   selected?: boolean;
-  playerNumber: number;
+  number: number;
   __v?: number;
 };
