@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Player } from './interface/player.interface';
 import { PlayerStatus } from './constant/player-status.constant';
+import { PlayerStatusItem } from './interface/player-status-item.interface';
 
 @Injectable({ providedIn: 'root' })
 export class AppHelper {
@@ -18,6 +19,14 @@ export class AppHelper {
 
   isPlayerDead(player: Player): boolean {
     return player.status === PlayerStatus.DEAD;
+  }
+
+  isPlayerDeactive(player: Player): boolean {
+    return player.status === PlayerStatus.DEACTIVE;
+  }
+
+  isPlayerActive(player: Player): boolean {
+    return player.status !== PlayerStatus.DEACTIVE;
   }
 
   hasstar(player: Player): boolean {
@@ -45,5 +54,20 @@ export class AppHelper {
       ...player,
       status: PlayerStatus.ALIVE,
     };
+  }
+
+  getListPlayerStatuses(): PlayerStatusItem[] {
+    const statuses = [];
+    for (const key in PlayerStatus) {
+      statuses.push({
+        key: key,
+        value: (PlayerStatus as { [k: string]: string })[key],
+      });
+    }
+    return statuses;
+  }
+
+  getPlayerAvatarByNumber(number: number): string {
+    return 'assets/avatar/' + number + '.png';
   }
 }

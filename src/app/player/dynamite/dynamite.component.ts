@@ -47,6 +47,7 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
   ngOnInit(): void {
     this.service.boom$.pipe(takeUntil(this.destroy$)).subscribe(() => {
       this.explode = () => {
+        this.onExplode();
         nativeElement.style.transform = 'scale(1.7)';
         nativeElement.className =
           'animate__animated animate__zoomIn animate__fast';
@@ -66,7 +67,11 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
     this.explode();
   }
 
+  explode(): void {}
+
+  // This method is instanciate by parent Component
   deSelect(): void {}
 
-  explode(): void {}
+  // This method is instanciate by parent Component
+  onExplode(): void {}
 }

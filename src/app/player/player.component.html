@@ -7,7 +7,7 @@
   <div class="star" *ngIf="!!player.star"></div>
   <div class="number">{{player.number}}</div>
   <div class="avatar">
-    <img [src]="'assets/avatar/' + player.avatar" width="100%" alt="" />
+    <img [src]="getAvatar()" width="100%" alt="" />
   </div>
   <!-- <div class="name">{{ player.number }} {{ player.name }}</div> -->
 </div>

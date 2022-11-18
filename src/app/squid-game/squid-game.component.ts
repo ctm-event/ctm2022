@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable, shareReplay, takeUntil } from 'rxjs';
+import { Observable, shareReplay, take, takeUntil, tap } from 'rxjs';
 import { fadeAnimation } from '../animation/fade.animation';
 import { Player } from '../interface/player.interface';
 import { AppService } from '../app.service';
@@ -16,9 +16,10 @@ import { SquidGameService } from './squid-game.service';
 })
 export class SquidGameComponent extends BaseComponent implements OnInit {
   public players$!: Observable<any>;
-  public players!: Player[];
   public selectedPlayers: Player[] = [];
   public isDisplayActionBar: boolean = false;
+  public totalStars: number = 0;
+  public totalPlayers: number = 0;
 
   public addSelectedPlayersForm = new FormGroup({
     number: new FormControl('', [
@@ -79,6 +80,11 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
   }
 
   private initiliaze() {
-    this.players$ = this.appService.alivePlayers.pipe(shareReplay());
+    this.players$ = this.appService.alivePlayers.pipe(shareReplay(), tap((players: Player[]) => {
+      this.totalStars = players.filter(p => p.star > 0).length;
+    }));
+    this.appService.allActivePlayers.pipe(take(1)).subscribe(players => {
+      this.totalPlayers = players.length;
+    });
   }
 }

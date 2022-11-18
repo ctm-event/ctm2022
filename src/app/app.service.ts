@@ -41,6 +41,14 @@ export class AppService {
     );
   }
 
+  get allActivePlayers() {
+    return this.storeService.players$.asObservable().pipe(
+      map((players) => {
+        return players.filter((player) => this.helper.isPlayerActive(player));
+      })
+    );
+  }
+
   get allPlayers() {
     return this.storeService.players$.asObservable();
   }
@@ -93,6 +101,10 @@ export class AppService {
     this.storeService.updatePlayers([updated]);
 
     this.storeService.savePlayersWithTimeout(allPlayers, 300);
+  }
+
+  savePLayer(player: Player) {
+    
   }
 
   private updatePlayerToDeadOrStandby(player: Player): Player {

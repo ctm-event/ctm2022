@@ -19,8 +19,11 @@
   </button>
 
   <div class="box-input-form">
-    <div style="flex: 1 1 auto;" class="flex-auto">
-      <span class="list-number-select" *ngFor="let selectedPlayer of selectedPlayers">
+    <div style="flex: 1 1 auto" class="flex-auto">
+      <span
+        class="list-number-select"
+        *ngFor="let selectedPlayer of selectedPlayers"
+      >
         {{ selectedPlayer.number }}
       </span>
     </div>
@@ -36,7 +39,10 @@
         min="0"
         placeholder="Enter number"
       />
-      <div class="mt-3"><span>total: 4/61</span> - <span>Star: 6</span></div>
+      <div class="mt-3">
+        <span>Alive: {{(players$ | async).length}}/{{ totalPlayers }}</span> -
+        <span>Has star: {{ totalStars }}</span>
+      </div>
     </form>
   </div>
 

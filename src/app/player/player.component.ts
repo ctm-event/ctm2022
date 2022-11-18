@@ -57,14 +57,14 @@ export class PlayerComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.appService.boom$
-      .pipe(
-        filter(() => this.helper.isPlayerSelected(this.player)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(() => {
-        this.out = true;
-      });
+    // this.appService.boom$
+    //   .pipe(
+    //     filter(() => this.helper.isPlayerSelected(this.player)),
+    //     takeUntil(this.destroy$)
+    //   )
+    //   .subscribe(() => {
+    //     this.out = true;
+    //   });
 
     this.squidGameService.addSelectedPlayer$
       .pipe(
@@ -74,6 +74,13 @@ export class PlayerComponent extends BaseComponent implements OnInit {
       .subscribe(() => {
         this.onPlayerSelect();
       });
+  }
+
+  getAvatar() {
+    return (
+      this.player.avatar ||
+      this.helper.getPlayerAvatarByNumber(this.player.number)
+    );
   }
 
   onPlayerSelect() {
@@ -91,6 +98,9 @@ export class PlayerComponent extends BaseComponent implements OnInit {
     this.player.selected = true;
     this.dynamiteCmpRef = this.placeHolder.createComponent(DynamiteComponent);
     this.dynamiteCmpRef.instance.deSelect = () => this.deSelect();
+    this.dynamiteCmpRef.instance.onExplode = () => {
+      this.out = true;
+    };
     this.onSelect.emit(this.player);
   }
 

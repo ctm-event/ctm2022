@@ -1,0 +1,51 @@
+<div class="row" style="overflow: hidden">
+  <div class="col-sm-3 col-xs-12">
+    <span class="list-number-select">
+      {{ player.number }}
+    </span>
+  </div>
+
+  <div class="col-sm-9 col-xs-12">
+    <form (submit)="save()" [formGroup]="playerForm">
+      <div class="form-group">
+        <label [for]="'name-' + player._id">Name</label>
+        <input
+          type="text"
+          class="form-control"
+          [id]="'name-' + player._id"
+          [value]="player.name"
+          placeholder="Enter Name"
+          formControlName="name"
+        />
+      </div>
+      <div class="form-group">
+        <label [for]="'status-' + player._id">Status</label>
+        <select
+          class="form-select"
+          aria-label="Default select example"
+          formControlName="status"
+        >
+          <option
+            [id]="'status-' + player._id"
+            *ngFor="let status of playerStatuses"
+            [value]="status.value"
+          >
+            {{ status.key }}
+          </option>
+        </select>
+      </div>
+      <div class="form-check">
+        <input
+          type="checkbox"
+          class="form-check-input"
+          [id]="'has-star-' + player._id"
+          formControlName="star"
+        />
+        <label class="form-check-label" [for]="'has-star-' + player._id"
+          >Has star</label
+        >
+      </div>
+      <button type="submit" class="btn btn-primary">Save</button>
+    </form>
+  </div>
+</div>

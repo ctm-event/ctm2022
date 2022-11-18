@@ -4,6 +4,7 @@ import { GraveyardComponent } from './graveyard/graveyard.component';
 import { HomeComponent } from './home/home.component';
 import { SquidGameComponent } from './squid-game/squid-game.component';
 import { SquidGameResolver } from './resolver/squid-game.resolver';
+import { AdminComponent } from './admin/admin.component';
 
 const routes: Routes = [
   {
@@ -20,6 +21,13 @@ const routes: Routes = [
   {
     path: 'graveyard',
     component: GraveyardComponent,
+    resolve: {
+      players: SquidGameResolver,
+    },
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
     resolve: {
       players: SquidGameResolver,
     },

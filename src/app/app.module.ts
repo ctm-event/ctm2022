@@ -14,6 +14,8 @@ import { DynamiteComponent } from './player/dynamite/dynamite.component';
 import { PlayerComponent } from './player/player.component';
 import { SquidGameResolver } from './resolver/squid-game.resolver';
 import { SquidGameComponent } from './squid-game/squid-game.component';
+import { AdminComponent } from './admin/admin.component';
+import { PlayerFormComponent } from './admin/player-form/player-form.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { SquidGameComponent } from './squid-game/squid-game.component';
     DynamiteComponent,
     HomeComponent,
     GraveyardComponent,
-    GraveComponent
+    GraveComponent,
+    AdminComponent,
+    PlayerFormComponent
   ],
   imports: [
     BrowserModule,
