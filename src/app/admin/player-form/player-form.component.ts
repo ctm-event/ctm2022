@@ -43,7 +43,7 @@ export class PlayerFormComponent implements OnInit {
 
   private initForm() {
     this.playerForm = new FormGroup({
-      name: new FormControl('', [Validators.required]),
+      name: new FormControl(this.player.name, [Validators.required]),
       star: new FormControl(!!this.player.star),
       status: new FormControl(this.player.status, [Validators.required])
     });
