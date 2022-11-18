@@ -103,8 +103,22 @@ export class AppService {
     this.storeService.savePlayersWithTimeout(allPlayers, 300);
   }
 
-  savePLayer(player: Player) {
-    
+  savePLayer(updatePlayer: Player) {
+    const allPlayers = this.storeService.players;
+    const index = allPlayers.findIndex(
+      (player) => player._id === updatePlayer._id
+    );
+
+    if (index === -1) return;
+    const updated = allPlayers[index];
+
+    allPlayers[index] = {
+      ...allPlayers[index],
+      ...updatePlayer,
+    };
+
+    this.storeService.updatePlayers([allPlayers[index]]);
+    this.storeService.players = allPlayers;
   }
 
   private updatePlayerToDeadOrStandby(player: Player): Player {

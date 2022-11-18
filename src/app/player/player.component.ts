@@ -57,15 +57,6 @@ export class PlayerComponent extends BaseComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.appService.boom$
-    //   .pipe(
-    //     filter(() => this.helper.isPlayerSelected(this.player)),
-    //     takeUntil(this.destroy$)
-    //   )
-    //   .subscribe(() => {
-    //     this.out = true;
-    //   });
-
     this.squidGameService.addSelectedPlayer$
       .pipe(
         filter((number) => this.player.number === number),
