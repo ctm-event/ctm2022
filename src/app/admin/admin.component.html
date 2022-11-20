@@ -1,10 +1,20 @@
 <div class="container-fluid page-wrapper">
-  <div class="row">
+  <!-- <div class="row">
     <div
       class="col-sm-6 col-xs-12 player-item"
       *ngFor="let p of allPlayers$ | async"
     >
       <app-player-form [player]="p" (onSave)="onPlayerSave($event)"></app-player-form>
     </div>
+  </div> -->
+
+  <div class="row g-4">
+    <div class="col-2"
+      *ngFor="let p of allPlayers$ | async"
+    >
+      <app-player-form [player]="p" (onSave)="onPlayerSave($event)"></app-player-form>
+    </div>
   </div>
+
 </div>
+
