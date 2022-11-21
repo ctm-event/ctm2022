@@ -41,6 +41,13 @@ export class PlayerFormComponent implements OnInit {
     this.onSave.emit(newValue);
   }
 
+  getAvatar() {
+    return (
+      this.player.avatar ||
+      this.helper.getPlayerAvatarByNumber(this.player.number)
+    );
+  }
+
   private initForm() {
     this.playerForm = new FormGroup({
       name: new FormControl(this.player.name, [Validators.required]),
