@@ -27,6 +27,10 @@ app-dynamite {
   border: 6px solid #ffcf94;
   cursor: not-allowed;
 }
+.box-person.standby .number{
+  background-color: #ffcf94;
+  color: #1a2f5a;
+}
 
 .box-person.alive:not(.selected) .avatar {
   cursor: url("../../assets/img/crosshair.png"), auto;
