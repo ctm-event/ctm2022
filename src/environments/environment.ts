@@ -6,6 +6,7 @@ export const environment = {
   production: false,
   baseHref: '',
   apiUrl: 'https://limitless-ocean-07338.herokuapp.com/api/players/',
+  nasaCode: '430dca173191ccd2e0e79234bf3924da',
 };
 
 /*

@@ -25,12 +25,10 @@ export class AdminComponent extends BaseComponent implements OnInit {
   }
 
   onPlayerSave(player: Player) {
-    console.log(player);
+    //
   }
 
   initilize() {
-    this.allPlayers$ = this.appService.allPlayers.pipe(
-      takeUntil(this.destroy$)
-    );
+    this.allPlayers$ = this.appService.allPlayers;
   }
 }

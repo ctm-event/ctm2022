@@ -4,7 +4,7 @@ import {
   Resolve,
   RouterStateSnapshot,
 } from '@angular/router';
-import { Observable, of } from 'rxjs';
+import { finalize, Observable, of, shareReplay } from 'rxjs';
 import { Player } from '../interface/player.interface';
 import { AppService } from '../app.service';
 import { StoreService } from '../store.service';
@@ -21,6 +21,6 @@ export class SquidGameResolver implements Resolve<Player[]> {
       return this.appService.allPlayers;
     }
 
-    return this.storeService.loadPlayers();
+    return this.appService.setAppLoading(this.storeService.loadPlayers());
   }
 }

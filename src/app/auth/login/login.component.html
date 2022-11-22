@@ -1,0 +1,44 @@
+<div class="container-fluid page-wrapper" @fadeAnimation>
+  <div class="row bs-example">
+    <div class="col-4 col-offset-4">
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" #form="ngForm">
+        <div class="mb-3">
+          <label for="username" class="form-label">Username</label>
+          <input
+            type="text"
+            class="form-control"
+            id="username"
+            aria-describedby="emailHelp"
+            placeholder="Enter username"
+            formControlName="username"
+          />
+          <div
+            id="usernameMessage"
+            class="form-text text-danger"
+            *ngIf="form.submitted && loginForm.get('username')!.invalid"
+          >
+            *Please enter username
+          </div>
+        </div>
+        <div class="mb-3">
+          <label for="password" class="form-label">Password</label>
+          <input
+            type="password"
+            class="form-control"
+            id="password"
+            placeholder="Password"
+            formControlName="password"
+          />
+          <div
+            id="passwordMessage"
+            class="form-text text-danger"
+            *ngIf="form.submitted && loginForm.get('password')!.invalid"
+          >
+            *Please enter password
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Login</button>
+      </form>
+    </div>
+  </div>
+</div>

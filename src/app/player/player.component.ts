@@ -68,10 +68,7 @@ export class PlayerComponent extends BaseComponent implements OnInit {
   }
 
   getAvatar() {
-    return (
-      this.player.avatar ||
-      this.helper.getPlayerAvatarByNumber(this.player.number)
-    );
+    return this.helper.getPlayerAvatar(this.player);
   }
 
   onPlayerSelect() {

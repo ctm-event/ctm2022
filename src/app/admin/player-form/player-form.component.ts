@@ -34,7 +34,7 @@ export class PlayerFormComponent implements OnInit {
     const newValue = {
       ...this.player,
       ...this.playerForm.value,
-      star: hasStar ? 1 : 0
+      star: hasStar ? 1 : 0,
     };
 
     this.appService.savePLayer(newValue);
@@ -42,17 +42,15 @@ export class PlayerFormComponent implements OnInit {
   }
 
   getAvatar() {
-    return (
-      this.player.avatar ||
-      this.helper.getPlayerAvatarByNumber(this.player.number)
-    );
+    return this.helper.getPlayerAvatar(this.player);
   }
 
   private initForm() {
     this.playerForm = new FormGroup({
       name: new FormControl(this.player.name, [Validators.required]),
       star: new FormControl(!!this.player.star),
-      status: new FormControl(this.player.status, [Validators.required])
+      status: new FormControl(this.player.status, [Validators.required]),
+      avatar: new FormControl(this.player.avatar),
     });
   }
 }

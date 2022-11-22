@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { map, of, Subject } from 'rxjs';
+import { BehaviorSubject, finalize, map, Observable, of, Subject } from 'rxjs';
 import { AppHelper } from './app.helper';
 import { BombStyle } from './constant/bomb-style.constant';
 import { Player } from './interface/player.interface';
@@ -10,6 +10,8 @@ import { StoreService } from './store.service';
 })
 export class AppService {
   private _bombStyle: BombStyle = BombStyle.EXPLOSION;
+
+  appLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   get bombStyle(): BombStyle {
     return this._bombStyle;
@@ -103,7 +105,7 @@ export class AppService {
     this.storeService.savePlayersWithTimeout(allPlayers, 300);
   }
 
-  savePLayer(updatePlayer: Player) {
+  savePLayer(updatePlayer: Player): any {
     const allPlayers = this.storeService.players;
     const index = allPlayers.findIndex(
       (player) => player._id === updatePlayer._id
@@ -117,8 +119,17 @@ export class AppService {
       ...updatePlayer,
     };
 
-    this.storeService.updatePlayers([allPlayers[index]]);
     this.storeService.players = allPlayers;
+    this.storeService.updatePlayers([allPlayers[index]]);
+  }
+
+  setAppLoading<T>(loadingSubject: Observable<T>): Observable<T> {
+    this.appLoading$.next(true);
+    return loadingSubject.pipe(
+      finalize(() => {
+        this.appLoading$.next(false);
+      })
+    );
   }
 
   private updatePlayerToDeadOrStandby(player: Player): Player {

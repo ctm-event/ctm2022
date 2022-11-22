@@ -16,6 +16,7 @@ import { SquidGameResolver } from './resolver/squid-game.resolver';
 import { SquidGameComponent } from './squid-game/squid-game.component';
 import { AdminComponent } from './admin/admin.component';
 import { PlayerFormComponent } from './admin/player-form/player-form.component';
+import { LoginComponent } from './auth/login/login.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { PlayerFormComponent } from './admin/player-form/player-form.component';
     GraveyardComponent,
     GraveComponent,
     AdminComponent,
-    PlayerFormComponent
+    PlayerFormComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

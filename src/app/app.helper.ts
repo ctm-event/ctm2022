@@ -67,7 +67,8 @@ export class AppHelper {
     return statuses;
   }
 
-  getPlayerAvatarByNumber(number: number): string {
-    return 'assets/avatar/' + number + '.png';
+  getPlayerAvatar(player: Player): string {
+    return 'assets/avatar/avatar-default.jpg';
+    return player.avatar || 'assets/avatar/' + player.number + '.png';
   }
 }
