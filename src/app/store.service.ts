@@ -1,14 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
-  BehaviorSubject,
-  delay,
-  map,
-  noop,
-  Observable,
-  of,
-  Subject,
-  tap,
+  BehaviorSubject, noop,
+  Observable, Subject,
+  tap
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AppHelper } from './app.helper';
