@@ -12,6 +12,7 @@ import { AuthService } from '../auth.service';
 })
 export class LoginComponent implements OnInit {
   loginForm!: FormGroup;
+  errorMss: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -23,7 +24,10 @@ export class LoginComponent implements OnInit {
     if (this.loginForm.invalid) return;
     if (this.authService.authenticate(this.loginForm.get('password')!.value)) {
       this.router.navigate(['/']);
+      return;
     }
+
+    this.errorMss = 'Invalid login information.';
   }
 
   private initialize() {
