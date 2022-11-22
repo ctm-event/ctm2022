@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, finalize, map, Observable, of, Subject } from 'rxjs';
+import {
+  BehaviorSubject,
+  finalize,
+  map,
+  noop,
+  Observable, Subject
+} from 'rxjs';
 import { AppHelper } from './app.helper';
 import { BombStyle } from './constant/bomb-style.constant';
 import { Player } from './interface/player.interface';
@@ -12,6 +18,7 @@ export class AppService {
   private _bombStyle: BombStyle = BombStyle.EXPLOSION;
 
   appLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  unitLoading$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   get bombStyle(): BombStyle {
     return this._bombStyle;
@@ -79,7 +86,9 @@ export class AppService {
     });
 
     if (!!updatedPlayers.length) {
-      this.storeService.updatePlayers(updatedPlayers);
+      this.setUnitLoading(
+        this.storeService.updatePlayers(updatedPlayers)
+      ).subscribe();
     }
 
     this.boom$.next(true);
@@ -100,7 +109,7 @@ export class AppService {
 
     const updated = this.helper.setToAlive(allPlayers[index]);
     allPlayers[index] = updated;
-    this.storeService.updatePlayers([updated]);
+    this.setUnitLoading(this.storeService.updatePlayers([updated])).subscribe();
 
     this.storeService.savePlayersWithTimeout(allPlayers, 300);
   }
@@ -120,7 +129,10 @@ export class AppService {
     };
 
     this.storeService.players = allPlayers;
-    this.storeService.updatePlayers([allPlayers[index]]);
+
+    this.setUnitLoading(
+      this.storeService.updatePlayers([allPlayers[index]])
+    ).subscribe(noop);
   }
 
   setAppLoading<T>(loadingSubject: Observable<T>): Observable<T> {
@@ -128,6 +140,15 @@ export class AppService {
     return loadingSubject.pipe(
       finalize(() => {
         this.appLoading$.next(false);
+      })
+    );
+  }
+
+  setUnitLoading<T>(loadingSubject: Observable<T>): Observable<T> {
+    this.unitLoading$.next(true);
+    return loadingSubject.pipe(
+      finalize(() => {
+        this.unitLoading$.next(false);
       })
     );
   }
@@ -150,7 +171,9 @@ export class AppService {
     });
 
     if (!!updatedPlayers.length) {
-      this.storeService.updatePlayers(updatedPlayers);
+      this.setUnitLoading(
+        this.storeService.updatePlayers(updatedPlayers)
+      ).subscribe();
     }
 
     this.storeService.players = allPlayers;

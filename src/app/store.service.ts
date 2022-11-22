@@ -42,7 +42,7 @@ export class StoreService {
   }
 
   updatePlayers(players: Player[]) {
-    this.http.patch<Player[]>(environment.apiUrl, players).subscribe(noop);
+    return this.http.patch<Player[]>(environment.apiUrl, players);
   }
 
   savePlayersWithTimeout(players: Player[], timeout: number = 1000) {
