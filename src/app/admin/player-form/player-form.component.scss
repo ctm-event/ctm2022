@@ -14,3 +14,19 @@
   font-size: 18px;
   font-weight: 600;
 }
+
+.card img {
+  padding: 16px;
+}
+
+.card.status-alive {
+ border-color: rgb(4, 30, 66);
+}
+
+.card.status-dead {
+ border-color: #ff0008;
+}
+
+.card.status-standby {
+ border-color: #ffcf94;
+}
