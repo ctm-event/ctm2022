@@ -1,7 +1,12 @@
 <div class="container-fluid page-wrapper" @fadeAnimation>
   <div class="row login-row">
     <div class="col-4 mx-auto">
-      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" #form="ngForm" class="form-login">
+      <form
+        [formGroup]="loginForm"
+        (ngSubmit)="onSubmit()"
+        #form="ngForm"
+        class="form-login"
+      >
         <div class="mb-3">
           <label for="username" class="form-label">Username</label>
           <input
@@ -45,5 +50,4 @@
     <p *ngIf="errorMss" class="text-danger">{{ errorMss }}</p>
   </div>
 </div>
-
-<div class="login-background"></div>
+<app-background></app-background>

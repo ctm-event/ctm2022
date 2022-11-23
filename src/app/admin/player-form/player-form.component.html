@@ -1,4 +1,4 @@
-<div class="card">
+<div [class]="'card ' + 'status-' + player.status">
   <img [src]="getAvatar()" class="card-img-top" alt="" />
   <div class="card-body">
     <h5 class="card-title">{{ player.number }} - {{ player.name }}</h5>

@@ -1,16 +1,15 @@
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
-  Resolve,
-  RouterStateSnapshot,
+  Resolve
 } from '@angular/router';
-import { finalize, Observable, of, shareReplay } from 'rxjs';
-import { Player } from '../interface/player.interface';
+import { Observable } from 'rxjs';
 import { AppService } from '../app.service';
+import { Player } from '../interface/player.interface';
 import { StoreService } from '../store.service';
 
 @Injectable()
-export class SquidGameResolver implements Resolve<Player[]> {
+export class PlayersResolver implements Resolve<Player[]> {
   constructor(
     private storeService: StoreService,
     private appService: AppService
