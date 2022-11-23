@@ -1,10 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { Observable, shareReplay, take, takeUntil, tap } from 'rxjs';
-import { fadeAnimation } from '../animation/fade.animation';
-import { Player } from '../interface/player.interface';
-import { AppService } from '../app.service';
+import { Component, ElementRef, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import party from 'party-js';
+import { Observable, shareReplay, take, takeUntil, tap, timer } from 'rxjs';
+import { fadeAnimation } from '../animation/fade.animation';
+import { AppService } from '../app.service';
 import { BaseComponent } from '../base.component';
+import { Player } from '../interface/player.interface';
 import { SquidGameService } from './squid-game.service';
 
 @Component({
@@ -31,7 +32,8 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
 
   constructor(
     private appService: AppService,
-    private squidGameService: SquidGameService
+    private squidGameService: SquidGameService,
+    private elemRef: ElementRef
   ) {
     super();
   }
@@ -63,10 +65,6 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
     this.appService.revive();
   }
 
-  private checkActionBar() {
-    this.isDisplayActionBar = !!this.selectedPlayers.length;
-  }
-
   onSubmit() {
     if (this.addSelectedPlayersForm.invalid) {
       return;
@@ -79,12 +77,32 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
     formControl.setValue('');
   }
 
+  private checkActionBar() {
+    this.isDisplayActionBar = !!this.selectedPlayers.length;
+  }
+
   private initiliaze() {
-    this.players$ = this.appService.alivePlayers.pipe(shareReplay(), tap((players: Player[]) => {
-      this.totalStars = players.filter(p => p.star > 0).length;
-    }));
-    this.appService.allActivePlayers.pipe(take(1)).subscribe(players => {
+    this.players$ = this.appService.alivePlayers.pipe(
+      shareReplay(),
+      tap((players: Player[]) => {
+        if (players.length === 1) {
+          this.throwConfetti();
+        }
+        this.totalStars = players.filter((p) => p.star > 0).length;
+      })
+    );
+    this.appService.allActivePlayers.pipe(take(1)).subscribe((players) => {
       this.totalPlayers = players.length;
     });
+  }
+
+  private throwConfetti() {
+    timer(0, 1000)
+      .pipe(takeUntil(this.destroy$))
+      .subscribe(() => {
+        party.confetti(this.elemRef.nativeElement, {
+          count: party.variation.range(25, 50),
+        });
+      });
   }
 }
