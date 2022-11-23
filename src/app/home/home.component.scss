@@ -9,8 +9,16 @@
 }
 
 .page-wrapper {
-  height: 70vh;
+  height: calc(100vh - 160px);
   display: flex;
   align-items: center;
   justify-content: center;
+  position: relative;
 }
+
+.text-ctm {
+  font-size: 500px;
+  color: #ccc;
+}
+
+/** Image gallery style **/

@@ -12,7 +12,7 @@ import { HomeComponent } from './home/home.component';
 import { MenuComponent } from './menu/menu.component';
 import { DynamiteComponent } from './player/dynamite/dynamite.component';
 import { PlayerComponent } from './player/player.component';
-import { SquidGameResolver } from './resolver/squid-game.resolver';
+import { PlayersResolver } from './resolver/players.resolver';
 import { SquidGameComponent } from './squid-game/squid-game.component';
 import { AdminComponent } from './admin/admin.component';
 import { PlayerFormComponent } from './admin/player-form/player-form.component';
@@ -39,7 +39,7 @@ import { LoginComponent } from './auth/login/login.component';
     BrowserAnimationsModule,
     ReactiveFormsModule
   ],
-  providers: [SquidGameResolver],
+  providers: [PlayersResolver],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
