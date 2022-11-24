@@ -1,4 +1,12 @@
 <div class="page-wrapper" @fadeAnimation>
   <h1 class="text-ctm">C T M</h1>
+  <div class="gallery">
+    <div class="slider">
+      <div class="slider-row">
+        <img *ngFor="let player of players$ | async"
+         [src]="getAvatar(player)" alt="">
+      </div>
+    </div>
+  </div>
 </div>
 <app-background></app-background>

@@ -1,5 +1,5 @@
 .page-wrapper {
-  height: calc(100vh - 160px);
+  height: calc(100vh - 180px);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,7 +8,41 @@
 
 .text-ctm {
   font-size: 500px;
-  color: #cccccc69;;
+  color: #cccccc69;
+  position: absolute;
 }
 
 /** Image gallery style **/
+
+img {
+  height: 100%;
+}
+$img-w: 5912px;
+$img-h: 389px;
+$shrink: 2;
+$ratio: 1 / $shrink;
+$speed: 100s;
+
+.slider {
+  position: absolute;
+  width: 100%;
+  bottom: $img-h;
+  overflow: hidden;
+  .slider-row {
+    width: $img-w * $ratio;
+    height: $img-h * $ratio;
+    background-color: #f00;
+    // background-image: url(https://s3-us-west-2.amazonaws.com/s.cdpn.io/111863/ubiquity-summit-web-01.png);
+    // background-size: $img-w * $ratio $img-h * $ratio;
+    animation: slide $speed linear infinite;
+  }
+}
+
+@keyframes slide {
+  from {
+    left: 0;
+  }
+  to {
+    left: -($img-w * $ratio);
+  }
+}
