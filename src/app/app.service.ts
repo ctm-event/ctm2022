@@ -4,7 +4,8 @@ import {
   finalize,
   map,
   noop,
-  Observable, Subject
+  Observable,
+  Subject,
 } from 'rxjs';
 import { AppHelper } from './app.helper';
 import { BombStyle } from './constant/bomb-style.constant';
@@ -54,6 +55,18 @@ export class AppService {
     return this.storeService.players$.asObservable().pipe(
       map((players) => {
         return players.filter((player) => this.helper.isPlayerActive(player));
+      })
+    );
+  }
+
+  get allBattlePlayers() {
+    return this.storeService.players$.asObservable().pipe(
+      map((players) => {
+        return players.filter(
+          (player) =>
+            this.helper.isPlayerDead(player) ||
+            this.helper.isPLayerAlive(player)
+        );
       })
     );
   }

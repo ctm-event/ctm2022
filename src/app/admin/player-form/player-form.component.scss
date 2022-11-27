@@ -15,6 +15,14 @@
   font-weight: 600;
 }
 
+textarea {
+  resize: none;
+}
+
+.card {
+  border-width: 2px;
+}
+
 .card img {
   padding: 16px;
 }
@@ -29,4 +37,8 @@
 
 .card.status-standby {
  border-color: #ffcf94;
+}
+
+.card.status-organization {
+ border-color: #cc00ff;
 }

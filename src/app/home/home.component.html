@@ -1,11 +1,20 @@
 <div class="page-wrapper" @fadeAnimation>
   <h1 class="text-ctm">C T M</h1>
   <div class="gallery">
-    <div class="slider">
-      <div class="slider-row">
-        <img *ngFor="let player of players$ | async"
-         [src]="getAvatar(player)" alt="">
+    <div class="current-selected" *ngIf="currentSelected">
+      <div #currentImgHolder
+        [class]="'current-selected__avatar animate__animated animate__faster ' + enterAnimationClass"
+      >
+        <img [src]="getAvatar(currentSelected)" alt="" />
       </div>
+      <div class="current-selected__quote">Không có gì quí hơn không khí</div>
+    </div>
+    <div class="slider">
+      <img
+        *ngFor="let player of players$ | async"
+        [src]="getAvatar(player)"
+        alt=""
+      />
     </div>
   </div>
 </div>

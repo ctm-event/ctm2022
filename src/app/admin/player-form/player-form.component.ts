@@ -51,6 +51,7 @@ export class PlayerFormComponent implements OnInit {
       star: new FormControl(!!this.player.star),
       status: new FormControl(this.player.status, [Validators.required]),
       avatar: new FormControl(this.player.avatar),
+      quote: new FormControl(this.player.quote)
     });
   }
 }

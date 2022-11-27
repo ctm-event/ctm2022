@@ -91,7 +91,7 @@ export class SquidGameComponent extends BaseComponent implements OnInit {
         this.totalStars = players.filter((p) => p.star > 0).length;
       })
     );
-    this.appService.allActivePlayers.pipe(take(1)).subscribe((players) => {
+    this.appService.allBattlePlayers.pipe(take(1)).subscribe((players) => {
       this.totalPlayers = players.length;
     });
   }

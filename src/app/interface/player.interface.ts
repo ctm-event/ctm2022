@@ -7,5 +7,6 @@ export interface Player {
   status: string;
   selected?: boolean;
   number: number;
+  quote: string;
   __v?: number;
 };

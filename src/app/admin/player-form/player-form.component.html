@@ -53,6 +53,20 @@
             formControlName="avatar"
           />
         </div>
+
+        <div class="form-group mb-3">
+          <label [for]="'quote-' + player._id">Quote</label>
+          <textarea
+            rows="2"
+            type="text"
+            class="form-control"
+            [id]="'quote-' + player._id"
+            [value]="player.quote"
+            placeholder="meningful words..."
+            formControlName="quote"
+          ></textarea>
+        </div>
+
         <div class="text-end">
           <button
             type="submit"
