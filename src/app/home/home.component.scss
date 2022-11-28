@@ -28,13 +28,21 @@
     }
   }
   .current-selected {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
     .current-selected__avatar {
+      padding-left: 0 0 64px 64px;
+      padding-bottom: 64px;
+      width: 25%;
       img {
-        transform: scale(1.5);
+        width: 250px;
         border-radius: 50%;
       }
     }
     .current-selected__quote {
+      font-size: 48px;
+      width: 60%;
     }
   }
 }
