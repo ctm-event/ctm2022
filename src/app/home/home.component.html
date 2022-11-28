@@ -8,7 +8,12 @@
           'current-selected__avatar animate__animated animate__faster animate__fadeInLeft'
         "
       >
-        <img [src]="getAvatar(currentSelected)" alt="" />
+        <img
+          (load)="onCurrentAvatarLoaded()"
+          (error)="onCurrentAvatarError($event)"
+          [src]="getAvatar(currentSelected)"
+          alt=""
+        />
       </div>
       <div
         [class]="

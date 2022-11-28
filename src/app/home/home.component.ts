@@ -7,6 +7,7 @@ import {
 } from '@angular/core';
 import {
   delay,
+  noop,
   Observable,
   Subscription,
   take,
@@ -33,7 +34,7 @@ export class HomeComponent
   players$!: Observable<Player[]>;
   allPlayers!: Player[];
   currentSelected!: Player;
-  notYetSelectedPlayers!: Player[];
+  quotes!: Player[];
 
   enterAnimationClass: string = 'animate__fadeInLeft';
   enterAnimationClass2: string = 'animate__fadeIn';
@@ -57,54 +58,63 @@ export class HomeComponent
 
   ngAfterViewInit() {
     this.players$.pipe(take(1)).subscribe((players) => {
-      this.allPlayers = players;
-      this.notYetSelectedPlayers = players;
-      this.setRandomQuote();
+      this.resetQuotes();
+      this.startQuoteLoop();
     });
-  }
-
-  setRandomQuote() {
-    this.randomQuoteSubscription = timer(1000, 5000)
-      .pipe(
-        takeUntil(this.destroy$),
-        tap(() => this.hideQuote()),
-        delay(500),
-        tap(() => this.prepareNextQuote()),
-        delay(50)
-      )
-      .subscribe(() => this.showQuote());
-  }
-
-  prepareNextQuote() {
-    console.log('prepare quote');
-    if (this.notYetSelectedPlayers.length === 1) {
-      this.setSelected(this.notYetSelectedPlayers[0]);
-      this.resetNotYetSelectedPlayers();
-      return;
-    }
-    this.setRandomNotYetSelectedPlayer();
-  }
-
-  setSelected(player: Player) {
-    this.currentSelected = player;
-  }
-
-  setRandomNotYetSelectedPlayer() {
-    const index = Math.floor(Math.random() * this.notYetSelectedPlayers.length);
-
-    this.setSelected(this.notYetSelectedPlayers[index]);
-    this.notYetSelectedPlayers.splice(index, 1);
-  }
-
-  resetNotYetSelectedPlayers() {
-    this.notYetSelectedPlayers = this.allPlayers.slice();
   }
 
   getAvatar(player: Player) {
     return this.helper.getPlayerAvatar(player);
   }
 
-  showQuote() {
+  onCurrentAvatarLoaded() {
+    this.showQuote();
+  }
+
+  onCurrentAvatarError(event: any) {
+    event.target.src = 'assets/avatar/avatar-default.jpg';
+  }
+
+  private startQuoteLoop() {
+    this.randomQuoteSubscription = timer(1000, 5000)
+      .pipe(
+        takeUntil(this.destroy$),
+        tap(() => this.hideQuote()),
+        delay(500),
+        tap(() => this.prepareNextQuote())
+      )
+      .subscribe(noop);
+  }
+
+  private hideQuote() {
+    console.log('hide');
+    if (!this.currentSelected) return;
+    (this.currentAvatar.nativeElement as HTMLElement).classList.add(
+      this.leaveAnimationClass
+    );
+    (this.currentQuote.nativeElement as HTMLElement).classList.add(
+      this.leaveAnimationClass
+    );
+  }
+
+  private prepareNextQuote() {
+    console.log('prepare');
+
+    const next = this.quotes.splice(0, 1);
+    console.log(next);
+
+    this.setSelected(next[0]);
+
+    this.resetQuoteListIfAllShown();
+  }
+
+  private resetQuoteListIfAllShown() {
+    if (this.quotes.length === 0) {
+      this.resetQuotes();
+    }
+  }
+
+  private showQuote() {
     console.log('show');
     if (!this.currentSelected) return;
     (this.currentAvatar.nativeElement as HTMLElement).classList.remove(
@@ -116,14 +126,12 @@ export class HomeComponent
     );
   }
 
-  hideQuote() {
-    console.log('hide');
-    if (!this.currentSelected) return;
-    (this.currentAvatar.nativeElement as HTMLElement).classList.add(
-      this.leaveAnimationClass
-    );
-    (this.currentQuote.nativeElement as HTMLElement).classList.add(
-      this.leaveAnimationClass
-    );
+
+  private setSelected(player: Player) {
+    this.currentSelected = player;
+  }
+
+  private resetQuotes() {
+    this.quotes = this.helper.shuffle([...this.allPlayers]);
   }
 }

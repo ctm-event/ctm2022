@@ -8,30 +8,12 @@
         class="form-login"
       >
         <div class="mb-3">
-          <label for="username" class="form-label">Username</label>
-          <input
-            type="text"
-            class="form-control"
-            id="username"
-            aria-describedby="emailHelp"
-            placeholder="Enter username"
-            formControlName="username"
-          />
-          <div
-            id="usernameMessage"
-            class="form-text text-danger"
-            *ngIf="form.submitted && loginForm.get('username')!.invalid"
-          >
-            *Please enter username
-          </div>
-        </div>
-        <div class="mb-3">
-          <label for="password" class="form-label">Password</label>
+          <label for="password" class="form-label">CODE</label>
           <input
             type="password"
             class="form-control"
             id="password"
-            placeholder="Password"
+            placeholder="--------"
             formControlName="password"
           />
           <div
@@ -39,10 +21,10 @@
             class="form-text text-danger"
             *ngIf="form.submitted && loginForm.get('password')!.invalid"
           >
-            *Please enter password
+            *Please enter NASA passcode
           </div>
         </div>
-        <button type="submit" class="btn btn-outline-success">Login</button>
+        <button type="submit" class="btn btn-outline-success">Check</button>
       </form>
     </div>
   </div>
