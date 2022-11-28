@@ -36,12 +36,16 @@ export class HomeComponent
   notYetSelectedPlayers!: Player[];
 
   enterAnimationClass: string = 'animate__fadeInLeft';
+  enterAnimationClass2: string = 'animate__fadeIn';
   leaveAnimationClass: string = 'animate__fadeOut';
 
   randomQuoteSubscription!: Subscription;
 
-  @ViewChild('currentImgHolder', { read: ElementRef })
-  currentImgHolder!: ElementRef;
+  @ViewChild('currentAvatar', { read: ElementRef })
+  currentAvatar!: ElementRef;
+
+  @ViewChild('currentQuote', { read: ElementRef })
+  currentQuote!: ElementRef;
 
   constructor(private appService: AppService, private helper: AppHelper) {
     super();
@@ -103,7 +107,11 @@ export class HomeComponent
   showQuote() {
     console.log('show');
     if (!this.currentSelected) return;
-    (this.currentImgHolder.nativeElement as HTMLElement).classList.remove(
+    (this.currentAvatar.nativeElement as HTMLElement).classList.remove(
+      this.leaveAnimationClass
+    );
+
+    (this.currentQuote.nativeElement as HTMLElement).classList.remove(
       this.leaveAnimationClass
     );
   }
@@ -111,7 +119,10 @@ export class HomeComponent
   hideQuote() {
     console.log('hide');
     if (!this.currentSelected) return;
-    (this.currentImgHolder.nativeElement as HTMLElement).classList.add(
+    (this.currentAvatar.nativeElement as HTMLElement).classList.add(
+      this.leaveAnimationClass
+    );
+    (this.currentQuote.nativeElement as HTMLElement).classList.add(
       this.leaveAnimationClass
     );
   }

@@ -1,13 +1,31 @@
 <div class="page-wrapper" @fadeAnimation>
-  <h1 class="text-ctm">C T M</h1>
+  <!-- <h1 class="text-ctm">C T M</h1> -->
   <div class="gallery">
     <div class="current-selected" *ngIf="currentSelected">
-      <div #currentImgHolder
-        [class]="'current-selected__avatar animate__animated animate__faster ' + enterAnimationClass"
+      <div
+        #currentAvatar
+        [class]="
+          'current-selected__avatar animate__animated animate__faster animate__fadeInLeft'
+        "
       >
         <img [src]="getAvatar(currentSelected)" alt="" />
       </div>
-      <div class="current-selected__quote">Không có gì quí hơn không khí</div>
+      <div
+        [class]="
+          'current-selected__quote animate__animated animate__faster animate__fadeIn' +
+          ''
+        "
+      >
+        <div
+          #currentQuote
+          [class]="'animate__animated animate__faster animate__fadeInRight'"
+        >
+          <h1>
+            {{ currentSelected.quote || "Không có gì quí hơn không khí" }}
+          </h1>
+          <h4>&mdash; {{ currentSelected.name }}</h4>
+        </div>
+      </div>
     </div>
     <div class="slider">
       <img
