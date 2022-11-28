@@ -1,11 +1,13 @@
 .page-wrapper {
-  height: calc(100vh - 112px);
+  height: calc(100vh - 56px);
   display: flex;
   overflow: hidden;
   align-items: flex-end;
   justify-content: center;
   position: relative;
   margin-top: 56px;
+  padding-bottom: 20%;
+  background-color: #ffe1fe;
 }
 
 .text-ctm {
@@ -31,14 +33,19 @@
       width: 100px;
     }
   }
+
+  .wrap-current-selected{
+    width: calc(100vw - 16px);
+  }
+
   .current-selected {
     display: flex;
     flex-direction: row;
     justify-content: space-around;
     .current-selected__avatar {
       padding-left: 0 0 64px 64px;
-      padding-bottom: 64px;
       width: 25%;
+      text-align: right;
       img {
         width: 250px;
         border-radius: 50%;
@@ -72,9 +79,9 @@
         line-height: 1;
         margin: 0;
       }
-      h4 {
+      h3 {
         position: relative;
-        color: #292a2b;
+        color: #000;
         font-size: 1.4rem;
         font-weight: normal;
         line-height: 1;

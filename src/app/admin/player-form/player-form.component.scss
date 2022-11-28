@@ -20,7 +20,7 @@ textarea {
 }
 
 .card {
-  border-width: 2px;
+  border-width: 3px;
 }
 
 .card img {
@@ -33,12 +33,21 @@ textarea {
 
 .card.status-dead {
  border-color: #ff0008;
+ .card-title{
+  color: #ff0008;
+ }
 }
 
 .card.status-standby {
  border-color: #ffcf94;
+ .card-title{
+  color: #ffcf94;
+ }
 }
 
 .card.status-organization {
  border-color: #cc00ff;
+ .card-title{
+  color: #cc00ff;
+ }
 }
