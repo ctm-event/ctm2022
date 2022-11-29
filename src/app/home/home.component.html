@@ -1,7 +1,10 @@
 <div class="page-wrapper" @fadeAnimation>
   <!-- <h1 class="text-ctm">C T M</h1> -->
   <div class="gallery">
-    <div class="current-selected" *ngIf="currentQuote">
+    <div
+      class="current-selected animate__animated animate__fadeIn animate__faster"
+      *ngIf="currentQuote"
+    >
       <div
         #currentAvatar
         [class]="
@@ -34,4 +37,4 @@
     </div>
   </div>
 </div>
-<app-background extraClasses="homepage"></app-background>
+<app-background [isRandomBg]="true"></app-background>
