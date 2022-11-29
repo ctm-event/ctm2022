@@ -1,14 +1,19 @@
 <div class="page-wrapper" @fadeAnimation>
   <!-- <h1 class="text-ctm">C T M</h1> -->
   <div class="gallery">
-    <div class="current-selected" *ngIf="currentSelected">
+    <div class="current-selected" *ngIf="currentQuote">
       <div
         #currentAvatar
         [class]="
           'current-selected__avatar animate__animated animate__faster animate__fadeInLeft'
         "
       >
-        <img [src]="getAvatar(currentSelected)" alt="" />
+        <img
+          [src]="getAvatar(currentQuote)"
+          (load)="onCurrentAvatarLoaded()"
+          (error)="onCurrentAvatarError($event)"
+          alt=""
+        />
       </div>
       <div
         [class]="
@@ -17,17 +22,16 @@
         "
       >
         <div
-          #currentQuote
+          #currentQuoteHolder
           [class]="'animate__animated animate__faster animate__fadeInRight'"
         >
           <h1>
-            {{ currentSelected.quote || "Không có gì quí hơn không khí" }}
+            {{ currentQuote.quote || "Không có gì quí hơn không khí Không có gì quí hơn không khí Không có gì quí hơn không khí Không có gì quí hơn không khí" }}
           </h1>
-          <h4>&mdash; {{ currentSelected.name }}</h4>
+          <h4 class="mt-4">&mdash; {{ currentQuote.name }}</h4>
         </div>
       </div>
     </div>
-  
   </div>
 </div>
 <app-background></app-background>

@@ -42,7 +42,7 @@ export class PlayerFormComponent implements OnInit {
   }
 
   getAvatar() {
-    return this.helper.getPlayerAvatar(this.player);
+    return this.helper.getAvatar(this.player);
   }
 
   private initForm() {

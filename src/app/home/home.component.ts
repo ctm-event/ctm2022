@@ -33,11 +33,9 @@ export class HomeComponent
 {
   players$!: Observable<Player[]>;
   allPlayers!: Player[];
-  currentSelected!: Player;
+  currentQuote!: Player;
   quotes!: Player[];
 
-  enterAnimationClass: string = 'animate__fadeInLeft';
-  enterAnimationClass2: string = 'animate__fadeIn';
   leaveAnimationClass: string = 'animate__fadeOut';
 
   randomQuoteSubscription!: Subscription;
@@ -45,8 +43,8 @@ export class HomeComponent
   @ViewChild('currentAvatar', { read: ElementRef })
   currentAvatar!: ElementRef;
 
-  @ViewChild('currentQuote', { read: ElementRef })
-  currentQuote!: ElementRef;
+  @ViewChild('currentQuoteHolder', { read: ElementRef })
+  currentQuoteHolder!: ElementRef;
 
   constructor(private appService: AppService, private helper: AppHelper) {
     super();
@@ -58,13 +56,14 @@ export class HomeComponent
 
   ngAfterViewInit() {
     this.players$.pipe(take(1)).subscribe((players) => {
+      this.allPlayers = [...players];
       this.resetQuotes();
       this.startQuoteLoop();
     });
   }
 
   getAvatar(player: Player) {
-    return this.helper.getPlayerAvatar(player);
+    return this.helper.getAvatar(player);
   }
 
   onCurrentAvatarLoaded() {
@@ -87,51 +86,49 @@ export class HomeComponent
   }
 
   private hideQuote() {
-    console.log('hide');
-    if (!this.currentSelected) return;
+    if (!this.currentQuote) return;
     (this.currentAvatar.nativeElement as HTMLElement).classList.add(
       this.leaveAnimationClass
     );
-    (this.currentQuote.nativeElement as HTMLElement).classList.add(
+    (this.currentQuoteHolder.nativeElement as HTMLElement).classList.add(
       this.leaveAnimationClass
     );
   }
 
   private prepareNextQuote() {
-    console.log('prepare');
+    if (!this.quotes.length) return;
 
     const next = this.quotes.splice(0, 1);
-    console.log(next);
-
     this.setSelected(next[0]);
 
     this.resetQuoteListIfAllShown();
   }
 
   private resetQuoteListIfAllShown() {
-    if (this.quotes.length === 0) {
+    if (!this.quotes.length) {
       this.resetQuotes();
     }
   }
 
   private showQuote() {
-    console.log('show');
-    if (!this.currentSelected) return;
+    if (!this.currentQuote) return;
     (this.currentAvatar.nativeElement as HTMLElement).classList.remove(
       this.leaveAnimationClass
     );
 
-    (this.currentQuote.nativeElement as HTMLElement).classList.remove(
+    (this.currentQuoteHolder.nativeElement as HTMLElement).classList.remove(
       this.leaveAnimationClass
     );
   }
 
-
   private setSelected(player: Player) {
-    this.currentSelected = player;
+    this.currentQuote = player;
   }
 
   private resetQuotes() {
     this.quotes = this.helper.shuffle([...this.allPlayers]);
+    if (this.quotes.length && this.quotes[0]._id === this.currentQuote?._id) {
+      this.resetQuotes();
+    }
   }
 }

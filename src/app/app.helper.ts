@@ -67,7 +67,7 @@ export class AppHelper {
     return statuses;
   }
 
-  getPlayerAvatar(player: Player): string {
+  getAvatar(player: Player): string {
     return player.avatar || 'assets/avatar/' + player.number + '.png';
   }
 
