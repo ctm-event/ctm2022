@@ -23,4 +23,4 @@ export const LoopBackgrounds = [
 
 export const DelayBackgroundLoop: number = 500;
 
-export const BackgroundIntervalDuration: number = 10000;
+export const BackgroundIntervalDuration: number = 9300;
