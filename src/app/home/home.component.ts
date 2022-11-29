@@ -36,6 +36,8 @@ export class HomeComponent
   currentQuote!: Player;
   quotes!: Player[];
 
+  defaultQuoteText: string = 'Không có gì quý hơn không khí!';
+
   leaveAnimationClass: string = 'animate__fadeOut';
 
   randomQuoteSubscription!: Subscription;
