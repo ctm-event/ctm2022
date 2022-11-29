@@ -1,18 +1,15 @@
 import {
-  ChangeDetectionStrategy,
   Component,
   ElementRef,
-  HostBinding,
-  Input,
-  OnInit,
-  ViewChild,
+  HostBinding, OnInit,
+  ViewChild
 } from '@angular/core';
 import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 import { takeUntil } from 'rxjs';
 import { BaseComponent } from 'src/app/base.component';
 import { environment } from 'src/environments/environment';
-import { SquidGameHelper } from '../../squid-game/squid-game.helper';
 import { AppService } from '../../app.service';
+import { SquidGameHelper } from '../../squid-game/squid-game.helper';
 
 @Component({
   selector: 'app-dynamite',
@@ -38,7 +35,7 @@ export class DynamiteComponent extends BaseComponent implements OnInit {
   constructor(
     private service: AppService,
     private sanitizer: DomSanitizer,
-    private helper: SquidGameHelper
+    helper: SquidGameHelper
   ) {
     super();
     this.imgSrc = helper.getSelectedIcon();
