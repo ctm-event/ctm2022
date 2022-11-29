@@ -1,11 +1,4 @@
-import {
-  Component,
-  HostBinding,
-  Input,
-  OnInit,
-  Sanitizer,
-} from '@angular/core';
-import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-background',
@@ -14,9 +7,7 @@ import { DomSanitizer, SafeStyle } from '@angular/platform-browser';
 })
 export class BackgroundComponent implements OnInit {
   @Input()
-  bgColor: string = 'none';
-
-  // background-color: #ffe1fe;
+  extraClasses: string = '';
 
   constructor() {}
 
