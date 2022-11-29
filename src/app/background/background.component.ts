@@ -49,7 +49,6 @@ export class BackgroundComponent
   }
 
   private nextBackground() {
-    console.log('next background');
     this.resetBackgroundClasses();
     const next = this.loopBackgrounds.splice(0, 1);
 
