@@ -11,6 +11,7 @@
   left: 0;
   z-index: -1;
   transition: 1s all ease-in-out;
+  transition-delay: 250ms;
   &.homepage {
     background-image: url("../../assets/img/background/bg-home-0.png");
     background-color: #ffe1fe;
