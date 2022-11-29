@@ -36,7 +36,7 @@ export class HomeComponent
   currentQuote!: Player;
   quotes!: Player[];
 
-  defaultQuoteText: string = 'Không có gì quý hơn không khí!';
+  defaultQuoteText: string = 'I love Contemi <3';
 
   leaveAnimationClass: string = 'animate__fadeOut';
 
