@@ -21,6 +21,6 @@ export const LoopBackgrounds = [
   'bg-loop-19.jpg',
 ];
 
-export const DelayBackgroundLoop: number = 500;
+export const DelayBackgroundLoop: number = 1000;
 
-export const BackgroundIntervalDuration: number = 9000;
+export const BackgroundIntervalDuration: number = 12000;

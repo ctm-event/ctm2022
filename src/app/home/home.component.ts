@@ -43,6 +43,7 @@ export class HomeComponent
   randomQuoteSubscription!: Subscription;
 
   private readonly quoteDuration: number = 6500;
+  private readonly quoteDelay: number = 1000;
 
   @ViewChild('currentAvatar', { read: ElementRef })
   currentAvatar!: ElementRef;
@@ -79,7 +80,7 @@ export class HomeComponent
   }
 
   private startQuoteLoop() {
-    this.randomQuoteSubscription = timer(1000, this.quoteDuration)
+    this.randomQuoteSubscription = timer(this.quoteDelay, this.quoteDuration)
       .pipe(
         takeUntil(this.destroy$),
         tap(() => this.hideQuote()),
