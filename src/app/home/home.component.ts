@@ -56,7 +56,7 @@ export class HomeComponent
   }
 
   ngOnInit(): void {
-    this.players$ = this.appService.allActivePlayers;
+    this.players$ = this.appService.allPlayers;
   }
 
   ngAfterViewInit() {

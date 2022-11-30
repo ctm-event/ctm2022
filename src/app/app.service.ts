@@ -65,7 +65,8 @@ export class AppService {
         return players.filter(
           (player) =>
             this.helper.isPlayerDead(player) ||
-            this.helper.isPLayerAlive(player)
+            this.helper.isPLayerAlive(player) ||
+            this.helper.isPlayerStandby(player)
         );
       })
     );
