@@ -4,4 +4,5 @@ export const PlayerStatus = {
   STANDBY: 'standby',
   ORGANIZATION: 'organization',
   DEACTIVE: 'deactive',
+  ABSENTEE: 'absentee'
 };
