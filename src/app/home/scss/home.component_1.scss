@@ -11,7 +11,7 @@
   height: calc(100vh - 56px);
   background: rgba(0, 0, 0, 0.7);
   overflow: hidden;
-  transition: 300ms linear all;
+  transition: 0.3s all ease-out;
   .queue-quote-selection__toggle {
     cursor: pointer;
     width: 100%;
@@ -31,11 +31,13 @@
   .queue-quote-selection__selected {
     padding: 8px;
     margin-top: 32px;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
+    opacity: 0.3;
   }
   .queue-quote-selection__list {
     text-align: left;
     padding: 8px;
+    opacity: 0.3;
   }
   .queue-quote-selection__img {
     width: 80px;
@@ -44,18 +46,13 @@
     cursor: pointer;
   }
   &.open {
-    animation: slide-top;
-    animation-duration: 0.3s;
     top: 56px;
     overflow-y: auto;
-  }
-}
-
-@keyframes slide-top {
-  from {
-    top: 100vh;
-  }
-  to {
-    top: 56px;
+    .queue-quote-selection__selected {
+      opacity: 1;
+    }
+    .queue-quote-selection__list {
+      opacity: 1;
+    }
   }
 }
