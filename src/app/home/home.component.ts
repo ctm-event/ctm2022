@@ -24,7 +24,7 @@ import { Player } from '../interface/player.interface';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss'],
+  styleUrls: ['./scss/home.component.scss', './scss/home.component_1.scss'],
   animations: [fadeAnimation],
 })
 export class HomeComponent
@@ -112,6 +112,10 @@ export class HomeComponent
     }
 
     this.queue.push(quote);
+  }
+
+  public removeFromQuoteQueue(index: number) {
+    this.queue.splice(index, 1);
   }
 
   private startQuoteLoop() {

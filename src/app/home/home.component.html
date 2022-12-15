@@ -45,7 +45,8 @@
   <div class="queue-quote-selection__selected">
     <img
       class="queue-quote-selection__img"
-      *ngFor="let next of queue"
+      *ngFor="let next of queue; index as i; trackByIndex"
+      (click)="removeFromQuoteQueue(i)"
       [src]="getAvatar(next)"
     />
   </div>
