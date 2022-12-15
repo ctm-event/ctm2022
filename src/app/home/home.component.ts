@@ -35,6 +35,7 @@ export class HomeComponent
   allPlayers!: Player[];
   currentQuote!: Player;
   quotes!: Player[];
+  queue: Player[] = [];
 
   defaultQuoteText: string = 'I love Contemi <3';
 
@@ -57,15 +58,14 @@ export class HomeComponent
 
   ngOnInit(): void {
     this.players$ = this.appService.allPlayers;
-  }
-
-  ngAfterViewInit() {
     this.players$.pipe(take(1)).subscribe((players) => {
       this.allPlayers = [...players];
       this.resetQuotes();
       this.startQuoteLoop();
     });
   }
+
+  ngAfterViewInit() {}
 
   getAvatar(player: Player) {
     return this.helper.getAvatar(player);
@@ -77,6 +77,17 @@ export class HomeComponent
 
   onCurrentAvatarError(event: any) {
     event.target.src = 'assets/avatar/avatar-default.jpg';
+  }
+
+  public addToQuoteQueue(quote: Player) {
+    const index: number = this.queue.findIndex(
+      (item) => item._id === quote._id
+    );
+    if (index !== -1) {
+      return;
+    }
+
+    this.queue.push(quote);
   }
 
   private startQuoteLoop() {
@@ -103,10 +114,22 @@ export class HomeComponent
   private prepareNextQuote() {
     if (!this.quotes.length) return;
 
+    if (this.queue.length) {
+      this.getNextQuoteFromQueue();
+      console.log(this.queue);
+
+      return;
+    }
+
     const next = this.quotes.splice(0, 1);
     this.setSelected(next[0]);
 
     this.resetQuoteListIfAllShown();
+  }
+
+  private getNextQuoteFromQueue() {
+    const next = this.queue.splice(0, 1);
+    this.setSelected(next[0]);
   }
 
   private resetQuoteListIfAllShown() {

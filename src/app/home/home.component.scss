@@ -76,6 +76,36 @@
   }
 }
 
+.queue-quote-selection {
+  position: fixed;
+  bottom: -100%;
+  left: 0;
+  flex-direction: column;
+  width: 100%;
+  display: flex;
+  max-height: 70vh;
+  background: rgba(0, 0, 0, 0.7);
+  overflow-y: scroll;
+  overflow-y: scroll;
+  .queue-quote-selection__selected {
+    padding: 8px;
+    min-height: 97px;
+  }
+  .queue-quote-selection__list {
+    text-align: left;
+    padding: 8px;
+  }
+  .queue-quote-selection__img {
+    width: 80px;
+    border-radius: 50%;
+    padding: 4px;
+    cursor: pointer;
+  }
+  &.open {
+    bottom: 0;
+  }
+}
+
 @keyframes slide {
   from {
     left: 0;

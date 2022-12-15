@@ -37,4 +37,23 @@
     </div>
   </div>
 </div>
+
+<div class="queue-quote-selection">
+  <div class="queue-quote-selection__selected">
+    <img
+      class="queue-quote-selection__img"
+      *ngFor="let next of queue"
+      [src]="getAvatar(next)"
+    />
+  </div>
+  <div class="queue-quote-selection__list">
+    <img
+      class="queue-quote-selection__img"
+      *ngFor="let quote of allPlayers"
+      (click)="addToQuoteQueue(quote)"
+      [src]="getAvatar(quote)"
+    />
+  </div>
+</div>
+
 <app-background [isRandomBg]="true"></app-background>
