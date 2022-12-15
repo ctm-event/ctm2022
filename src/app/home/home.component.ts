@@ -52,6 +52,9 @@ export class HomeComponent
   @ViewChild('currentQuoteHolder', { read: ElementRef })
   currentQuoteHolder!: ElementRef;
 
+  @ViewChild('queueQuoteSelectionHolder', { read: ElementRef })
+  queueQuoteSelectionHolder!: ElementRef;
+
   constructor(private appService: AppService, private helper: AppHelper) {
     super();
   }
@@ -77,6 +80,27 @@ export class HomeComponent
 
   onCurrentAvatarError(event: any) {
     event.target.src = 'assets/avatar/avatar-default.jpg';
+  }
+
+  toggleSelection() {
+    if (
+      this.queueQuoteSelectionHolder.nativeElement.classList.contains('open')
+    ) {
+      return this.queueQuoteSelectionHolder.nativeElement.classList.remove(
+        'open'
+      );
+    }
+    this.queueQuoteSelectionHolder.nativeElement.classList.add('open');
+  }
+
+  hideSelection() {
+    if (
+      this.queueQuoteSelectionHolder.nativeElement.classList.contains('open')
+    ) {
+      return this.queueQuoteSelectionHolder.nativeElement.classList.remove(
+        'open'
+      );
+    }
   }
 
   public addToQuoteQueue(quote: Player) {
@@ -116,8 +140,6 @@ export class HomeComponent
 
     if (this.queue.length) {
       this.getNextQuoteFromQueue();
-      console.log(this.queue);
-
       return;
     }
 
