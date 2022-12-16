@@ -93,16 +93,6 @@ export class HomeComponent
     this.queueQuoteSelectionHolder.nativeElement.classList.add('open');
   }
 
-  hideSelection() {
-    if (
-      this.queueQuoteSelectionHolder.nativeElement.classList.contains('open')
-    ) {
-      return this.queueQuoteSelectionHolder.nativeElement.classList.remove(
-        'open'
-      );
-    }
-  }
-
   public addToQuoteQueue(quote: Player) {
     const index: number = this.queue.findIndex(
       (item) => item._id === quote._id

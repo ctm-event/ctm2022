@@ -1,4 +1,4 @@
-<div class="page-wrapper" @fadeAnimation  (click)="hideSelection()" >
+<div class="page-wrapper" @fadeAnimation>
   <!-- <h1 class="text-ctm">C T M</h1> -->
   <div class="gallery">
     <div
@@ -38,7 +38,7 @@
   </div>
 </div>
 
-<div class="queue-quote-selection" #queueQuoteSelectionHolder>
+<div class="queue-quote-selection d-none d-md-block" #queueQuoteSelectionHolder>
   <div class="queue-quote-selection__toggle" (click)="toggleSelection()">
     <div class="queue-quote-selection__toggle__content"></div>
   </div>
