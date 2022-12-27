@@ -2,12 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {
   BehaviorSubject, noop,
-  Observable, Subject,
+  Observable, of, Subject,
   tap
 } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AppHelper } from './app.helper';
 import { Player } from './interface/player.interface';
+import { _players } from './squid-game/players.mock';
 
 @Injectable({
   providedIn: 'root',
@@ -29,12 +30,19 @@ export class StoreService {
   public players$: Subject<Player[]> = new BehaviorSubject<Player[]>([]);
 
   loadPlayers(): Observable<Player[]> {
-    return this.http.get<Player[]>(environment.apiUrl).pipe(
+    return of<Player[]>(_players).pipe(
       tap((_players) => {
         this.players = _players;
         this.loaded = true;
       })
     );
+
+    // return this.http.get<Player[]>(environment.apiUrl).pipe(
+    //   tap((_players) => {
+    //     this.players = _players;
+    //     this.loaded = true;
+    //   })
+    // );
   }
 
   updateAllPlayers() {
